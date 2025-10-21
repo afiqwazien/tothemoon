@@ -1,103 +1,117 @@
+"use client"
 import Image from "next/image";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, CarouselIndicators } from "@/components/ui/carousel";
+import React from "react";
+import AboutSection from "@/components/ui/AboutSection";
+import ContactSection from "@/components/ui/ContactSection";
+import catalog from "./data/catalog.json";
+import { motion } from "framer-motion";
+import Header from "@/components/ui/Header";
 
-export default function Home() {
+const backgroundSlides = [
+  { src: "/bg-image1.jpg", alt: "Designer Wedding Cake" },
+  { src: "/bg-image2.jpg", alt: "Engagement Cake" },
+  { src: "/bg-image2.jpg", alt: "Birthday Cake" },
+];
+
+export default function HomePage() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className="">
+      {/* Slider with Nav */}
+      <section className="relative h-screen w-full">
+        <Carousel className="h-full w-full" opts={{ loop: true }}>
+          <CarouselContent>
+            {backgroundSlides.map((slide, i) => (
+              <CarouselItem key={i}>
+                <div className="relative h-screen w-full">
+                  <Image
+                    src={slide.src}
+                    alt={slide.alt}
+                    fill
+                    priority={i === 0}
+                    className="object-cover"
+                  />
+                  {/* Dark overlay, doesn't block arrows */}
+                  <div className="pointer-events-none absolute inset-0 bg-black/40 z-10" />
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
+          {/* Arrows as direct children of Carousel */}
+          <CarouselPrevious className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-black/40 hover:bg-black/60 text-white p-3 rounded-full cursor-pointer" />
+          <CarouselNext className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-black/40 hover:bg-black/60 text-white p-3 rounded-full cursor-pointer" />
+          <CarouselIndicators />
+        </Carousel>
+
+        <Header/>
+
+        {/* Centered CTA overlay */}
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-slate-100 z-10 space-y-6">
+          <h2 className="text-4xl md:text-6xl font-bold">Designer Cakes</h2>
+          <p className="text-xl md:text-2xl">Crafted with Love by TastiePastry</p>
           <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#products"
+            className="px-6 py-3 bg-slate-800 text-slate-100 font-semibold rounded-xl shadow hover:bg-opacity-90"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
+            View Our Products
           </a>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </section>
+
+      <AboutSection />
+
+      {/* Catalog Sections */}
+      <section id="products" className="space-y-16 p-8 w-full mx-auto max-w-7xl">
+
+        {catalog.map((category) => (
+          <motion.div key={category.id}
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="relative h-[350px] md:h-[450px] rounded-2xl overflow-hidden shadow-lg"
+          >
+          <div key={category.id}>
+            <div className="flex justify-between items-center mb-6">
+              <h3 className="text-2xl font-bold text-slate-100">{category.title}</h3>
+              <a
+                href={`/catalog?category=${category.id}`}
+                className="text-slate-100 hover:underline font-medium"
+              >
+                View More →
+              </a>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+              {category.cakes.filter((item, index) => index < 3).map((cake) => (
+                <a
+                  key={cake.slug}
+                  href={`/catalog/${cake.slug}`}
+                  className="group block rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition"
+                >
+                  <div className="relative w-full h-60">
+                    <Image
+                      src={cake.image}
+                      alt={cake.name}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                  <div className="p-4 bg-white">
+                    <h4 className="font-semibold text-lg text-gray-800">{cake.name}</h4>
+                    <p className="text-pink-600 font-medium">{cake.price}</p>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+          </motion.div>
+        ))}
+      </section>
+
+      <ContactSection />
     </div>
   );
 }
+

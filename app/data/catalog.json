@@ -1,0 +1,100 @@
+ [
+  {
+    "id":"floral-cakes",
+    "title": "Floral Cakes ✨",
+    "slug": "Floral Cakes",
+    "cakes": [
+      { "name": "Pure", "slug": "pure", "image": "/default-image1.jpg", "price": "RM230 – RM320", "sizes": { "5_Tall": 230, "6_Tall": 320 } },
+      { "name": "Mossy Rock", "slug": "mossy-rock", "image": "/default-image1.jpg", "price": "RM180 – RM320", "sizes": { "5_Basic": 180, "5_Tall": 230, "6_Basic": 230, "6_Tall": 320 } },
+      { "name": "Fresh Flowers", "slug": "fresh-flowers", "image": "/default-image1.jpg", "price": "RM200 – RM340", "sizes": { "5_Basic": 200, "5_Tall": 250, "6_Basic": 250, "6_Tall": 340 } },
+      { "name": "Dashy", "slug": "dashy", "image": "/default-image1.jpg", "price": "RM160 – RM290", "sizes": { "5_Basic": 160, "5_Tall": 210, "6_Basic": 210, "6_Tall": 290 } },
+      { "name": "Hazel", "slug": "hazel", "image": "/default-image1.jpg", "price": "RM170 – RM300", "sizes": { "5_Basic": 170, "5_Tall": 220, "6_Basic": 220, "6_Tall": 300 } },
+      { "name": "Sugar Flowers", "slug": "sugar-flowers", "image": "/default-image1.jpg", "price": "RM200 – RM350", "sizes": { "5_Basic": 200, "5_Tall": 250, "6_Basic": 250, "6_Tall": 350 } },
+      { "name": "Heaven Scent", "slug": "heaven-scent", "image": "/default-image1.jpg", "price": "RM180 – RM320", "sizes": { "5_Basic": 180, "5_Tall": 230, "6_Basic": 230, "6_Tall": 320 } },
+      { "name": "Bloom Edition", "slug": "bloom-edition", "image": "/default-image1.jpg", "price": "RM200 – RM350", "sizes": { "5_Basic": 200, "5_Tall": 250, "6_Basic": 250, "6_Tall": 350 } },
+      { "name": "Iris (Bloom)", "slug": "iris-bloom", "image": "/default-image1.jpg", "price": "RM200", "sizes": { "6_Basic": 200 } },
+      { "name": "Arch Cake", "slug": "arch-cake", "image": "/default-image1.jpg", "price": "RM450", "sizes": { "5_Square_Tall": 450 } }
+    ]
+  },
+  {
+    "id":"classic-vintage",
+    "title": "Classic & Vintage 🎩",
+    "slug": "Classic & Vintage",
+    "cakes": [
+      { "name": "Classic", "slug": "classic", "image": "/default-image1.jpg", "price": "RM200 – RM350", "sizes": { "5_Basic": 200, "5_Tall": 260, "6_Basic": 260, "6_Tall": 350 } },
+      { "name": "Classic (Tiered)", "slug": "classic-tiered", "image": "/default-image1.jpg", "price": "RM550 – RM820", "sizes": { "5+7_Basic": 550, "4+6_Tall": 680, "5+7_Tall": 680, "4+6_Basic": 820 } },
+      { "name": "Classic Macarons (Tiered)", "slug": "classic-macarons-tiered", "image": "/default-image1.jpg", "price": "RM520 – RM780", "sizes": { "5+7_Basic": 520, "4+6_Tall": 650, "5+7_Tall": 650, "4+6_Basic": 780 } },
+      { "name": "Classic Peony", "slug": "classic-peony", "image": "/default-image1.jpg", "price": "RM1100 – RM1400", "sizes": { "4+6+8": 1100, "5+7+9": 1400 } },
+      { "name": "Classic Sugar Flowers", "slug": "classic-sugar-flowers", "image": "/default-image1.jpg", "price": "RM180 – RM320", "sizes": { "5_Basic": 180, "5_Tall": 240, "6_Basic": 240, "6_Tall": 320 } },
+      { "name": "Classic + Macarons", "slug": "classic-macarons", "image": "/default-image1.jpg", "price": "RM560 – RM880", "sizes": { "5+7_Basic": 560, "4+6_Tall": 730, "5+7_Tall": 730, "4+6_Basic": 880 } },
+      { "name": "Vintage + Cherry", "slug": "vintage-cherry", "image": "/default-image1.jpg", "price": "RM550 – RM850", "sizes": { "5+7_Basic": 550, "4+6_Tall": 700, "5+7_Tall": 700, "4+6_Basic": 850 } },
+      { "name": "Vintage Tiered", "slug": "vintage-tiered", "image": "/default-image1.jpg", "price": "RM1300 – RM1800", "sizes": { "4+6+8_Tall": 1300, "5+7+9_Tall": 1800 } },
+      { "name": "Rustic Ruffle", "slug": "rustic-ruffle", "image": "/default-image1.jpg", "price": "RM480 – RM730", "sizes": { "5+7_Basic": 480, "4+6_Tall": 580, "5+7_Tall": 580, "4+6_Basic": 730 } },
+      { "name": "Naked Rustic", "slug": "naked-rustic", "image": "/default-image1.jpg", "price": "RM180 – RM300", "sizes": { "5_Basic": 180, "5_Tall": 230, "6_Basic": 230, "6_Tall": 300 } },
+      { "name": "Naked Rustic (Tiered)", "slug": "naked-rustic-tiered", "image": "/default-image1.jpg", "price": "RM950 – RM1250", "sizes": { "4+6+8": 950, "5+7+9": 1250 } },
+      { "name": "La Rosée", "slug": "la-rosee", "image": "/default-image1.jpg", "price": "RM360", "sizes": { "6_Basic": 360 } },
+      { "name": "La Rosée (Tiered)", "slug": "la-rosee-tiered", "image": "/default-image1.jpg", "price": "RM620 – RM750", "sizes": { "4+6_Basic": 620, "5+7_Basic": 750 } },
+      { "name": "Strawberry Vintage", "slug": "strawberry-vintage", "image": "/default-image1.jpg", "price": "RM165 – RM560", "sizes": { "6_Petite": 165, "5_Basic": 200, "4+6_Basic": 560 } },
+      { "name": "Regency Romance", "slug": "regency-romance", "image": "/default-image1.jpg", "price": "RM750", "sizes": { "4+6_Tall": 750 } },
+      { "name": "White on White", "slug": "white-on-white", "image": "/default-image1.jpg", "price": "RM270", "sizes": { "6_Basic": 270 } },
+      { "name": "Green Serenity", "slug": "green-serenity", "image": "/default-image1.jpg", "price": "RM700", "sizes": { "4+6_Tall": 700 } },
+      { "name": "Bluefleur De Lune", "slug": "bluefleur-de-lune", "image": "/default-image1.jpg", "price": "RM1500", "sizes": { "4+6+8_Tall": 1500 } },
+      { "name": "Bridgerton", "slug": "bridgerton", "image": "/default-image1.jpg", "price": "RM980 – RM2800", "sizes": { "5+7_Basic": 980, "4+6+8+10+12": 2800 } },
+      { "name": "Graceful", "slug": "graceful", "image": "/default-image1.jpg", "price": "RM2800", "sizes": { "4+6+8+10+12": 2800 } }
+    ]
+  },
+  {
+    "id":"modern-minimal",
+    "title": "Modern & Minimal ✨",
+    "slug": "Modern & Minimal",
+    "cakes": [
+      { "name": "Minimal (Tiered)", "slug": "minimal-tiered", "image": "/default-image1.jpg", "price": "RM450 – RM700", "sizes": { "5+7_Basic": 450, "4+6_Tall": 550, "5+7_Tall": 550, "4+6_Basic": 700 } },
+      { "name": "Verdant Dream", "slug": "verdant-dream", "image": "/default-image1.jpg", "price": "RM580 – RM900", "sizes": { "5+7_Basic": 580, "4+6_Tall": 730, "5+7_Tall": 730, "4+6_Basic": 900 } },
+      { "name": "Painted Buttercream", "slug": "painted-buttercream", "image": "/default-image1.jpg", "price": "RM200 – RM350", "sizes": { "5_Basic": 200, "5_Tall": 250, "6_Basic": 250, "6_Tall": 350 } },
+      { "name": "Aesthetic (Blush)", "slug": "aesthetic-blush", "image": "/default-image1.jpg", "price": "RM480 – RM780", "sizes": { "5+7_Basic": 480, "4+6_Tall": 600, "5+7_Tall": 600, "4+6_Basic": 780 } },
+      { "name": "Aesthetic (Painted)", "slug": "aesthetic-painted", "image": "/default-image1.jpg", "price": "RM980 – RM1300", "sizes": { "4+6+8": 980, "5+7+9": 1300 } },
+      { "name": "Aesthetic (Rice Paper Sail)", "slug": "aesthetic-rice-paper", "image": "/default-image1.jpg", "price": "RM480 – RM800", "sizes": { "5+7_Basic": 480, "4+6_Tall": 630, "5+7_Tall": 630, "4+6_Basic": 800 } },
+      { "name": "Celestial Flow", "slug": "celestial-flow", "image": "/default-image1.jpg", "price": "RM550 – RM880", "sizes": { "5+7_Basic": 550, "4+6_Tall": 700, "5+7_Tall": 700, "4+6_Basic": 880 } },
+      { "name": "Golden Veil", "slug": "golden-veil", "image": "/default-image1.jpg", "price": "RM500 – RM830", "sizes": { "5+7_Basic": 500, "4+6_Tall": 650, "5+7_Tall": 650, "4+6_Basic": 830 } },
+      { "name": "Silken Bloom", "slug": "silken-bloom", "image": "/default-image1.jpg", "price": "RM750", "sizes": { "4+6_Tall": 750 } },
+      { "name": "White on White", "slug": "white-on-white", "image": "/default-image1.jpg", "price": "RM270", "sizes": { "6_Basic": 270 } },
+      { "name": "Green Serenity", "slug": "green-serenity", "image": "/default-image1.jpg", "price": "RM700", "sizes": { "4+6_Tall": 700 } },
+      { "name": "Bluefleur De Lune", "slug": "bluefleur-de-lune", "image": "/default-image1.jpg", "price": "RM1500", "sizes": { "4+6+8_Tall": 1500 } }
+    ]
+  },
+  {
+    "id":"macaron-dessert-cakes",
+    "title": "Macaron & Dessert Cakes 🍬",
+    "slug": "Macaron & Dessert Cakes",
+    "cakes": [
+      { "name": "Macarons + Flowers", "slug": "macarons-flowers", "image": "/default-image1.jpg", "price": "RM200 – RM350", "sizes": { "5_Basic": 200, "5_Tall": 250, "6_Basic": 250, "6_Tall": 350 } },
+      { "name": "Macarons", "slug": "macarons", "image": "/default-image1.jpg", "price": "RM180 – RM320", "sizes": { "5_Basic": 180, "5_Tall": 230, "6_Basic": 230, "6_Tall": 320 } },
+      { "name": "Macarons Tower", "slug": "macarons-tower", "image": "/default-image1.jpg", "price": "From RM180", "sizes": { "25pcs_with_flowers": 180 } },
+      { "name": "Macarons Cake Tower", "slug": "macarons-cake-tower", "image": "/default-image1.jpg", "price": "RM400", "sizes": { "6_Cake+25pcs_Macarons": 400 } },
+      { "name": "Cake + Brownies Truffle Tower", "slug": "cake-brownies-truffle-tower", "image": "/default-image1.jpg", "price": "RM680", "sizes": { "6+8_Cake+25pcs_BrowniesTruffles": 680 } },
+      { "name": "Cake + Cupcakes Tower", "slug": "cake-cupcakes-tower", "image": "/default-image1.jpg", "price": "RM300 – RM500", "sizes": { "depends_on_cake_size_and_cupcakes": "300–500" } }
+    ]
+  },
+  {
+    "id":"special-editions",
+    "title": "Special Editions 💍",
+    "slug": "Special Editions",
+    "cakes": [
+      { "name": "Fairytales", "slug": "fairytales", "image": "/default-image1.jpg", "price": "RM200 – RM350", "sizes": { "5_Basic": 200, "5_Tall": 250, "6_Basic": 250, "6_Tall": 350 } },
+      { "name": "Be Mine", "slug": "be-mine", "image": "/default-image1.jpg", "price": "RM680 – RM1200", "sizes": { "4+6_Basic": 680, "5+7_Tall": 950, "4+6+8_Tall": 1200 } },
+      { "name": "Splendour", "slug": "splendour", "image": "/default-image1.jpg", "price": "RM1200", "sizes": { "4+6+8_Tall": 1200 } },
+      { "name": "Whimpsical", "slug": "whimpsical", "image": "/default-image1.jpg", "price": "RM250 – RM850", "sizes": { "5_Tall": 250, "6_Tall": 330, "5+7_Basic": 550, "4+6_Tall": 680, "5+7_Tall": 680, "4+6_Basic": 850 } },
+      { "name": "Amber Petals", "slug": "amber-petals", "image": "/default-image1.jpg", "price": "RM380 – RM530", "sizes": { "6_Tall": 380, "4+6_Basic": 530 } },
+      { "name": "Autumn Bloom", "slug": "autumn-bloom", "image": "/default-image1.jpg", "price": "RM550", "sizes": { "4+6_Basic": 550 } },
+      { "name": "Arty Crafty", "slug": "arty-crafty", "image": "/default-image1.jpg", "price": "RM520", "sizes": { "4+6_Basic": 520 } },
+      { "name": "Fondness", "slug": "fondness", "image": "/default-image1.jpg", "price": "RM280 – RM880", "sizes": { "5_Tall": 280, "4+6_Basic": 560, "4+6_Tall": 720, "5+7_Basic": 720, "5+7_Tall": 880 } },
+      { "name": "Aristella", "slug": "aristella", "image": "/default-image1.jpg", "price": "RM1750", "sizes": { "5+7+9_Basic": 1750 } },
+      { "name": "Floral Bow", "slug": "floral-bow", "image": "/default-image1.jpg", "price": "RM1100 – RM1400", "sizes": { "4+6+8": 1100, "5+7+9": 1400 } },
+      { "name": "Mossy Rock (Ribbon)", "slug": "mossy-rock-ribbon", "image": "/default-image1.jpg", "price": "RM350", "sizes": { "6_Tall": 350 } },
+      { "name": "Mossy Rock (Tiered)", "slug": "mossy-rock-tiered", "image": "/default-image1.jpg", "price": "RM450", "sizes": { "4+6_Mini": 450 } },
+      { "name": "Embellished", "slug": "embellished", "image": "/default-image1.jpg", "price": "RM550 – RM1500", "sizes": { "5+7_Basic": 550, "4+6_Tall": 700, "5+7_Tall": 700, "4+6_Basic": 900, "4+6+8": 1200, "5+7+9": 1500 } },
+      { "name": "Leaves of Love", "slug": "leaves-of-love", "image": "/default-image1.jpg", "price": "RM500 – RM1300", "sizes": { "5+7_Basic": 500, "4+6_Tall": 630, "5+7_Tall": 630, "4+6_Basic": 780, "4+6+8": 1050, "5+7+9": 1300 } },
+      { "name": "Meaningful", "slug": "meaningful", "image": "/default-image1.jpg", "price": "RM460 – RM700", "sizes": { "5+7_Basic": 460, "4+6_Tall": 560, "5+7_Tall": 560, "4+6_Basic": 700 } }
+    ]
+  }
+]

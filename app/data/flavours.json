@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Vanilla",
+    "description": "Vanilla Cake filled with Vanilla Buttercream & Berries Compote",
+    "colors": ["bg-yellow-200", "bg-yellow-100"]
+  },
+  {
+    "name": "Red Velvet",
+    "description": "Red Velvet Cake filled with Cream Cheese & layers of Hazelnut Spread",
+    "colors": ["bg-red-600", "bg-red-400"]
+  },
+  {
+    "name": "Carrot",
+    "description": "Carrot Cake filled with Caramel Cream Cheese",
+    "colors": ["bg-orange-500", "bg-orange-300"]
+  },
+  {
+    "name": "Chocolate Hazelnut",
+    "description": "Chocolate Cake filled with Hazelnut Buttercream & layers of Hazelnut Spread",
+    "colors": ["bg-amber-900", "bg-amber-700"]
+  },
+  {
+    "name": "Salted Caramel Chocolate",
+    "description": "Chocolate Cake filled with Salted Caramel Buttercream & layers of Salted Caramel",
+    "colors": ["bg-black", "bg-amber-200"]
+  },
+  {
+    "name": "Belgium Chocolate",
+    "description": "Chocolate Cake filled with Belgium Dark Chocolate Ganache",
+    "colors": ["bg-stone-900", "bg-stone-700"]
+  }
+]
