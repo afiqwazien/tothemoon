@@ -113,7 +113,7 @@ export default function PlaceAutocomplete() {
   };
 
   return (
-    <div className="relative w-80">
+    <div className="relative w-7/8">
       <input
         type="text"
         value={input}

@@ -4,7 +4,7 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import React from "react";
 import AboutSection from "@/components/ui/AboutSection";
 import ContactSection from "@/components/ui/ContactSection";
-import catalog from "./data/catalog.json";
+import catalog from "@/data/catalog.json";
 import { motion } from "framer-motion";
 import Header from "@/components/ui/Header";
 import { FaArrowRight } from "react-icons/fa";

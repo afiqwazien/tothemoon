@@ -6,8 +6,8 @@ import Link from "next/link";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import Header from "@/components/ui/Header";
-import cakeCatalog from "../../data/catalog.json";
-import flavours from "../../data/flavours.json";
+import cakeCatalog from "@/data/catalog.json";
+import flavours from "@/data/flavours.json";
 import {
   Tooltip,
   TooltipTrigger,

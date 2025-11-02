@@ -1,7 +1,7 @@
 "use client";
 
 import { useSearchParams, useRouter } from "next/navigation";
-import cakeCatalog from "../../app/data/catalog.json";
+import cakeCatalog from "@/data/catalog.json";
 import ProductCard from "@/components/ui/ProductCard";
 import Header from "@/components/ui/Header";
 import { Suspense, useState } from "react";
