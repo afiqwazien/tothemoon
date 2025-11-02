@@ -36,9 +36,6 @@
       { "name": "La Rosée (Tiered)", "slug": "la-rosee-tiered", "image": "/default-image1.jpg", "price": "RM620 – RM750", "sizes": { "4+6_Basic": 620, "5+7_Basic": 750 } },
       { "name": "Strawberry Vintage", "slug": "strawberry-vintage", "image": "/default-image1.jpg", "price": "RM165 – RM560", "sizes": { "6_Petite": 165, "5_Basic": 200, "4+6_Basic": 560 } },
       { "name": "Regency Romance", "slug": "regency-romance", "image": "/default-image1.jpg", "price": "RM750", "sizes": { "4+6_Tall": 750 } },
-      { "name": "White on White", "slug": "white-on-white", "image": "/default-image1.jpg", "price": "RM270", "sizes": { "6_Basic": 270 } },
-      { "name": "Green Serenity", "slug": "green-serenity", "image": "/default-image1.jpg", "price": "RM700", "sizes": { "4+6_Tall": 700 } },
-      { "name": "Bluefleur De Lune", "slug": "bluefleur-de-lune", "image": "/default-image1.jpg", "price": "RM1500", "sizes": { "4+6+8_Tall": 1500 } },
       { "name": "Bridgerton", "slug": "bridgerton", "image": "/default-image1.jpg", "price": "RM980 – RM2800", "sizes": { "5+7_Basic": 980, "4+6+8+10+12": 2800 } },
       { "name": "Graceful", "slug": "graceful", "image": "/default-image1.jpg", "price": "RM2800", "sizes": { "4+6+8+10+12": 2800 } }
     ]

@@ -5,7 +5,6 @@ import cakeCatalog from "../data/catalog.json";
 import ProductCard from "@/components/ui/ProductCard";
 import Header from "@/components/ui/Header";
 import { useState } from "react";
-import Link from "next/link";
 
 export default function ShopPage({ onPriceChange }: { onPriceChange?: (price: number) => void }) {
   const searchParams = useSearchParams();
@@ -45,12 +44,6 @@ export default function ShopPage({ onPriceChange }: { onPriceChange?: (price: nu
   const handleChange = (value: number) => {
     setMaxPrice(value);
     if (onPriceChange) onPriceChange(value); // notify parent if needed
-  };
-
-  const updatePrice = (price: number) => {
-    const params = new URLSearchParams(searchParams);
-    params.set("maxPrice", price.toString());
-    router.push(`/catalog?${params.toString()}`);
   };
 
   return (

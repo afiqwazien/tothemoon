@@ -36,13 +36,13 @@ export default function AboutSection() {
           </h2>
           <p className="text-lg leading-relaxed mb-6">
             <span className="font-semibold text-pink-600 mr-1">TastiePastry</span>  
-            is built on one belief. That every moment worth remembering deserves a cake that's just as meaningful - and
+            is built on one belief. That every moment worth remembering deserves a cake that is just as meaningful - and
             beautifully designed.
           </p>
           <p className="text-lg leading-relaxed">
             From rustic ruffles to elegant wedding cakes, we believe in crafting 
             desserts that not only taste amazing, but also tell a story. 
-            Because for us, it’s never just about the cake — it’s about the moment.
+            Because for us, it is never just about the cake — it is about the moment.
           </p>
         </motion.div>
       </div>

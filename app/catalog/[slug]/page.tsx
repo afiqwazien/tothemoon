@@ -22,7 +22,6 @@ export default function ProductDetailPage() {
   const params = useParams();
   const slug = params.slug as string;
   const [selectedFlavour, setSelectedFlavour] = useState(flavours[0].name);
-  const [showDescription, setShowDescription] = useState<string | null>(null);
   const [quantity, setQuantity] = useState(1);
   const [activeFlavour, setActiveFlavour] = useState<string | null>(null);
 
