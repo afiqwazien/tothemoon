@@ -3,6 +3,7 @@
 import CheckoutAddressInput from "@/components/ui/CheckoutAddressInput";
 import { useEffect, useState } from "react";
 import { useCart } from "@/app/context/CartContext";
+import Image from "next/image";
 
 export default function CheckoutPage() {
   const { cart, addToCart, removeFromCart } = useCart();
@@ -89,7 +90,7 @@ export default function CheckoutPage() {
                 {cartItems.map((item, idx) => (
                   <div key={idx} className="flex items-center justify-between py-4">
                     {/* Product Image */}
-                    <img
+                    <Image
                       src={item.image}
                       alt={item.name}
                       className="w-20 h-20 object-cover rounded-lg border border-slate-600"
