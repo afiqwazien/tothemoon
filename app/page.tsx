@@ -81,7 +81,7 @@ export default function HomePage() {
                 className="text-slate-100 hover:underline font-medium"
               >
                 {/* Show text on tablet/desktop */}
-                <span className="hidden sm:inline">View More</span>
+                <span className="hidden sm:inline">View More →</span>
 
                 {/* Show arrow only on mobile */}
                 <FaArrowRight className="w-4 h-4 sm:hidden" />
