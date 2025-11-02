@@ -7,6 +7,7 @@ import ContactSection from "@/components/ui/ContactSection";
 import catalog from "./data/catalog.json";
 import { motion } from "framer-motion";
 import Header from "@/components/ui/Header";
+import { FaArrowRight } from "react-icons/fa";
 
 const backgroundSlides = [
   { src: "/bg-image1.jpg", alt: "Designer Wedding Cake" },
@@ -70,7 +71,7 @@ export default function HomePage() {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="relative h-[350px] md:h-[450px] rounded-2xl overflow-hidden shadow-lg"
+            className="relative h-[350px] md:h-[400px] rounded-2xl overflow-hidden shadow-lg"
           >
           <div key={category.id}>
             <div className="flex justify-between items-center mb-6">
@@ -79,7 +80,8 @@ export default function HomePage() {
                 href={`/catalog?category=${category.id}`}
                 className="text-slate-100 hover:underline font-medium"
               >
-                View More →
+                <span className="hidden sm:inline">View More →</span>
+                <FaArrowRight />
               </a>
             </div>
 
@@ -90,7 +92,7 @@ export default function HomePage() {
                   href={`/catalog/${cake.slug}`}
                   className="group block rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition"
                 >
-                  <div className="relative w-full h-60">
+                  <div className="relative w-full h-50 md:h-60">
                     <Image
                       src={cake.image}
                       alt={cake.name}
@@ -98,10 +100,33 @@ export default function HomePage() {
                       className="object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                   </div>
-                  <div className="p-4 bg-white">
+                  {/* <div className="p-4 bg-white">
                     <h4 className="font-semibold text-lg text-gray-800">{cake.name}</h4>
                     <p className="text-pink-600 font-medium">{cake.price}</p>
+                  </div> */}
+
+                  <div className="relative p-5 flex flex-col gap-3 bg-white">
+                    <h3
+                      className="text-sm md:text-base font-semibold text-gray-800 group-hover:text-pink-600
+                      transition-colors duration-300 line-clamp-2 leading-snug"
+                    >
+                      {cake.name}
+                    </h3>
+                    
+                    {/* Price with subtle background */}
+                    <div className="flex items-center justify-between">
+                      <span className="text-md font-bold text-pink-600">
+                        {cake.price}
+                      </span>
+                      {/* <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div className="w-1.5 h-1.5 rounded-full bg-pink-400"></div>
+                        <div className="w-1.5 h-1.5 rounded-full bg-pink-400"></div>
+                        <div className="w-1.5 h-1.5 rounded-full bg-pink-400"></div>
+                      </div> */}
+                    </div>
                   </div>
+
+                  
                 </a>
               ))}
             </div>
