@@ -80,8 +80,11 @@ export default function HomePage() {
                 href={`/catalog?category=${category.id}`}
                 className="text-slate-100 hover:underline font-medium"
               >
-                <span className="hidden sm:inline">View More →</span>
-                <FaArrowRight />
+                {/* Show text on tablet/desktop */}
+                <span className="hidden sm:inline">View More</span>
+
+                {/* Show arrow only on mobile */}
+                <FaArrowRight className="w-4 h-4 sm:hidden" />
               </a>
             </div>
 
