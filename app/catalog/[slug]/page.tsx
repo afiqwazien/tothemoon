@@ -15,6 +15,9 @@ import {
   TooltipProvider,
 } from "@/components/ui/tooltip";
 import { useCart } from "@/app/context/CartContext";
+import { toast } from "sonner";
+import { ShoppingCart } from "lucide-react";
+
 
 
 
@@ -75,6 +78,13 @@ export default function ProductDetailPage() {
     quantity,
     price: Number(product.sizes[selectedSize as keyof typeof product.sizes]),
   });
+
+  // Show success toast
+    toast.success("Added to cart!", {
+      description: "Item successfully added to your shopping cart 🛍️",
+      icon: <ShoppingCart className="w-5 h-5" />,
+      duration: 3000,
+    })
 };
 
   return (

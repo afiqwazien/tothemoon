@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Footer from "@/components/ui/Footer";
 import { CartProvider } from "@/app/context/CartContext";
+import { Toaster } from "sonner";
+
 
 export const metadata: Metadata = {
   title: "To the moon",
@@ -21,6 +23,7 @@ export default function RootLayout({
 
         {/* Footer */}
         <Footer />
+        <Toaster position="bottom-right" />
 
       </body>
     </html>
