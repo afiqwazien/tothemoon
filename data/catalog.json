@@ -1,6 +1,7 @@
  [
   {
     "id":"floral-cakes",
+    "mainCategory": "wedding-cakes",
     "title": "Floral Cakes ✨",
     "slug": "Floral Cakes",
     "cakes": [
@@ -18,6 +19,7 @@
   },
   {
     "id":"classic-vintage",
+    "mainCategory": "wedding-cakes",
     "title": "Classic & Vintage 🎩",
     "slug": "Classic & Vintage",
     "cakes": [
@@ -42,6 +44,7 @@
   },
   {
     "id":"modern-minimal",
+    "mainCategory": "wedding-cakes",
     "title": "Modern & Minimal ✨",
     "slug": "Modern & Minimal",
     "cakes": [
@@ -61,6 +64,7 @@
   },
   {
     "id":"macaron-dessert-cakes",
+    "mainCategory": "wedding-cakes",
     "title": "Macaron & Dessert Cakes 🍬",
     "slug": "Macaron & Dessert Cakes",
     "cakes": [
@@ -74,6 +78,7 @@
   },
   {
     "id":"special-editions",
+    "mainCategory": "wedding-cakes",
     "title": "Special Editions 💍",
     "slug": "Special Editions",
     "cakes": [
@@ -92,6 +97,232 @@
       { "name": "Embellished", "slug": "embellished", "image": "/default-image1.jpg", "price": "RM550 – RM1500", "sizes": { "5+7_Basic": 550, "4+6_Tall": 700, "5+7_Tall": 700, "4+6_Basic": 900, "4+6+8": 1200, "5+7+9": 1500 } },
       { "name": "Leaves of Love", "slug": "leaves-of-love", "image": "/default-image1.jpg", "price": "RM500 – RM1300", "sizes": { "5+7_Basic": 500, "4+6_Tall": 630, "5+7_Tall": 630, "4+6_Basic": 780, "4+6+8": 1050, "5+7+9": 1300 } },
       { "name": "Meaningful", "slug": "meaningful", "image": "/default-image1.jpg", "price": "RM460 – RM700", "sizes": { "5+7_Basic": 460, "4+6_Tall": 560, "5+7_Tall": 560, "4+6_Basic": 700 } }
+    ]
+  },
+  {
+    "id": "bento-cakes",
+    "mainCategory": "desserts",
+    "title": "Bento Cakes",
+    "slug": "Bento Cakes",
+    "cakes": [
+      { "name": "Bento Cake (4 Inch)", "slug": "bento-cake-4-inch", "image": "/default-image1.jpg", "price": "RM35 – RM50", "sizes": { "4_inch_simple": 35, "4_inch_custom_design": 50 } }
+    ]
+  },
+  {
+    "id": "choux-au-craquelin",
+    "mainCategory": "desserts",
+    "title": "Choux Au Craquelin",
+    "slug": "Choux Au Craquelin",
+    "cakes": [
+      { "name": "Choux Au Craquelin", "slug": "choux-au-craquelin-9pcs", "image": "/default-image1.jpg", "price": "RM25 – RM40", "sizes": { "9pcs_vanilla": 25, "9pcs_mix_vanilla_berries": 30, "9pcs_berries": 35, "9pcs_chocolate": 40 } }
+    ]
+  },
+  {
+    "id": "brownies",
+    "mainCategory": "desserts",
+    "title": "Brownies",
+    "slug": "Brownies",
+    "cakes": [
+      { "name": "Plain Brownies", "slug": "plain-brownies", "image": "/default-image1.jpg", "price": "RM25 – RM55", "sizes": { "6_inch_16pcs": 25, "7_inch_25pcs": 40, "9_inch_36pcs": 55 } },
+      { "name": "Drizzled Brownies (Hazelnut / Salted Caramel)", "slug": "drizzled-brownies", "image": "/default-image1.jpg", "price": "RM35 – RM70", "sizes": { "6_inch_16pcs": 35, "7_inch_25pcs": 50, "9_inch_36pcs": 70 } },
+      { "name": "Mix Brownies", "slug": "mix-brownies", "image": "/default-image1.jpg", "price": "RM80", "sizes": { "9_inch_36pcs": 80 } }
+    ]
+  },
+  {
+    "id": "traditional-cakes",
+    "mainCategory": "desserts",
+    "title": "Traditional Cakes",
+    "slug": "Traditional Cakes",
+    "cakes": [
+      { "name": "Choc Chip Bar", "slug": "choc-chip-bar", "image": "/default-image1.jpg", "price": "RM50 – RM75", "sizes": { "7_inch": 50, "9_inch": 75 } },
+      { "name": "Kek Batik Dark Chocolate Ganache", "slug": "kek-batik-dark-chocolate-ganache", "image": "/default-image1.jpg", "price": "RM50 – RM90", "sizes": { "7_inch": 50, "9_inch": 90 } },
+      { "name": "Marble Cake", "slug": "marble-cake", "image": "/default-image1.jpg", "price": "RM40", "sizes": { "8_inch": 40 } }
+    ]
+  },
+  {
+    "id": "tarts",
+    "mainCategory": "desserts",
+    "title": "Tarts",
+    "slug": "Tarts",
+    "cakes": [
+      { "name": "Classic Tarts", "slug": "classic-tarts", "image": "/default-image1.jpg", "price": "RM40 – RM70", "sizes": { "25pcs_chocolate_or_cheese": 40, "36pcs_chocolate_or_cheese": 55, "25pcs_fruit": 50, "36pcs_fruit": 70 } },
+      { "name": "Designer Tarts", "slug": "designer-tarts", "image": "/default-image1.jpg", "price": "RM60 – RM85", "sizes": { "25pcs": 60, "36pcs": 85 } }
+    ]
+  },
+  {
+    "id": "cheesecakes-and-premium",
+    "mainCategory": "desserts",
+    "title": "Cheesecakes & Premium Cakes",
+    "slug": "Cheesecakes & Premium Cakes",
+    "cakes": [
+      { "name": "Burnt Cheesecake", "slug": "burnt-cheesecake", "image": "/default-image1.jpg", "price": "RM40 – RM85", "sizes": { "5_inch": 40, "7_inch": 85 } },
+      { "name": "Tiramisu", "slug": "tiramisu-dessert", "image": "/default-image1.jpg", "price": "RM20 – RM65", "sizes": { "single_cup": 20, "6_inch": 65 } }
+    ]
+  },
+  {
+    "id": "dessert-table-packages",
+    "mainCategory": "desserts",
+    "title": "Dessert Table Packages",
+    "slug": "Dessert Table Packages",
+    "cakes": [{ "name": "Dessert Table Package", "slug": "dessert-table-package", "image": "/default-image1.jpg", "price": "RM160 – RM2940", "sizes": { "25_pax": 160, "50_pax": 310, "100_pax": 620, "300_pax": 1330, "500_pax": 1570, "1000_pax": 2940 } }]
+  },
+  {
+    "id": "hantaran-cakes",
+    "mainCategory": "hantaran",
+    "title": "Hantaran Cakes",
+    "slug": "Hantaran Cakes",
+    "cakes": [
+      { "name": "Vintage Edition Cake", "slug": "vintage-edition-cake", "image": "/default-image1.jpg", "price": "RM130 – RM350", "sizes": { "5_petite": 130, "5_basic": 175, "5_tall": 195, "6_basic": 265, "6_tall": 350 } },
+      { "name": "Love Shape Cake", "slug": "love-shape-cake", "image": "/default-image1.jpg", "price": "RM135 – RM205", "sizes": { "6_inch": 135, "7_inch": 205 } },
+      { "name": "Rustic Bloom Cake", "slug": "rustic-bloom-cake", "image": "/default-image1.jpg", "price": "RM135 – RM320", "sizes": { "5_petite": 135, "5_basic": 165, "5_tall": 155, "6_basic": 235, "6_tall": 320 } },
+      { "name": "Vintage & Flowers Cake", "slug": "vintage-flowers-cake", "image": "/default-image1.jpg", "price": "RM190 – RM300", "sizes": { "5_petite": 190, "5_basic": 230, "6_basic": 300 } },
+      { "name": "Minimal Buttercream Flowers Cake", "slug": "minimal-buttercream-flowers-cake", "image": "/default-image1.jpg", "price": "RM110 – RM300", "sizes": { "5_petite": 110, "5_basic": 165, "5_tall": 145, "6_basic": 215, "6_tall": 300 } },
+      { "name": "Elegant Edition Cake", "slug": "elegant-edition-cake", "image": "/default-image1.jpg", "price": "RM165 – RM340", "sizes": { "6_petite": 165, "5_basic": 200, "6_basic": 265, "6_tall": 340 } }
+    ]
+  },
+  {
+    "id": "square-cakes",
+    "mainCategory": "hantaran",
+    "title": "Square Cakes",
+    "slug": "Square Cakes",
+    "cakes": [
+      { "name": "Painted Flowers Square Cake", "slug": "painted-flowers-square-cake", "image": "/default-image1.jpg", "price": "RM145 – RM270", "sizes": { "7_inch": 145, "9_inch": 270 } },
+      { "name": "Vintage Square Cake", "slug": "vintage-square-cake", "image": "/default-image1.jpg", "price": "RM195 – RM350", "sizes": { "7_inch": 195, "8_inch": 350 } }
+    ]
+  },
+  {
+    "id": "cupcakes-combo-sets",
+    "mainCategory": "hantaran",
+    "title": "Cupcakes & Combo Sets",
+    "slug": "Cupcakes & Combo Sets",
+    "cakes": [
+      { "name": "Cupcakes Set", "slug": "cupcakes-set", "image": "/default-image1.jpg", "price": "RM45 – RM115", "sizes": { "4pcs": 45, "6pcs": 65, "9pcs": 90, "12pcs": 115 } },
+      { "name": "Cake + Cupcakes Set", "slug": "cake-cupcakes-set", "image": "/default-image1.jpg", "price": "From RM70", "sizes": { "bento_plus_2": 70, "bento_plus_5": 90, "5inch_plus_9": 185 } },
+      { "name": "Designer Cupcakes Set", "slug": "designer-cupcakes-set", "image": "/default-image1.jpg", "price": "RM95 – RM140", "sizes": { "7pcs": 95, "9pcs": 140 } }
+    ]
+  },
+  {
+    "id": "dessert-towers",
+    "mainCategory": "hantaran",
+    "title": "Dessert Towers",
+    "slug": "Dessert Towers",
+    "cakes": [
+      { "name": "Brownies Tower", "slug": "brownies-tower", "image": "/default-image1.jpg", "price": "RM70 – RM130", "sizes": { "25pcs": 70, "36pcs": 95, "50pcs": 130 } },
+      { "name": "Brownies Truffle Tower", "slug": "brownies-truffle-tower", "image": "/default-image1.jpg", "price": "RM180", "sizes": { "25pcs": 180 } },
+      { "name": "Macarons Tower", "slug": "macarons-tower", "image": "/default-image1.jpg", "price": "RM180 – RM220", "sizes": { "25pcs": 180, "25pcs_with_flowers": 220 } },
+      { "name": "Choux Tower", "slug": "choux-tower", "image": "/default-image1.jpg", "price": "RM180", "sizes": { "25pcs": 180 } },
+      { "name": "Macarons Cake Tower", "slug": "macarons-cake-tower", "image": "/default-image1.jpg", "price": "RM400", "sizes": { "6_inch_cake_plus_25_macarons": 400 } }
+    ]
+  },
+  {
+    "id": "cake-cupcake-bouquets",
+    "mainCategory": "hantaran",
+    "title": "Bouquet Sets",
+    "slug": "Bouquet Sets",
+    "cakes": [
+      { "name": "Cake Bouquet", "slug": "cake-bouquet", "image": "/default-image1.jpg", "price": "RM95 – RM165", "sizes": { "4_inch": 95, "5_inch": 165 } },
+      { "name": "Cupcakes Bouquet", "slug": "cupcakes-bouquet", "image": "/default-image1.jpg", "price": "RM95 – RM150", "sizes": { "6pcs": 95, "7pcs": 150 } }
+    ]
+  },
+  {
+    "id": "wedding-doorgifts",
+    "mainCategory": "hantaran",
+    "title": "Doorgifts",
+    "slug": "Doorgifts",
+    "cakes": [
+      { "name": "Brownies Doorgift", "slug": "brownies-doorgift", "image": "/default-image1.jpg", "price": "RM3.50 – RM3.80", "sizes": { "1_200pcs": 3.8, "201_plus": 3.5 } },
+      { "name": "Macarons Doorgift (2pcs)", "slug": "macarons-doorgift", "image": "/default-image1.jpg", "price": "RM7.60 – RM8.00", "sizes": { "1_99pcs": 8.0, "100_plus": 7.6 } },
+      { "name": "Cupcake Doorgift", "slug": "cupcake-doorgift", "image": "/default-image1.jpg", "price": "RM7.80 – RM8.50", "sizes": { "1_200pcs": 8.5, "201_plus": 7.8 } }
+    ]
+  },
+  {
+    "id": "birthday-standard-cakes",
+    "mainCategory": "birthday",
+    "title": "Birthday Cakes",
+    "slug": "Birthday Cakes",
+    "cakes": [
+      { "name": "Minimal Design Cake", "slug": "minimal-design-cake", "image": "/default-image1.jpg", "price": "RM80 – RM230", "sizes": { "5_petite": 80, "6_tall": 230 } },
+      { "name": "Vintage Design Cake", "slug": "vintage-design-cake", "image": "/default-image1.jpg", "price": "RM130 – RM320", "sizes": { "5_petite": 130, "6_tall": 320 } },
+      { "name": "Painted Flowers & Vintage Cake", "slug": "painted-flowers-vintage-cake", "image": "/default-image1.jpg", "price": "RM120 – RM300", "sizes": { "5_petite": 120, "6_tall": 300 } },
+      { "name": "Buttercream Flower Cake", "slug": "buttercream-flower-cake", "image": "/default-image1.jpg", "price": "RM130 – RM320", "sizes": { "5_petite": 130, "6_tall": 320 } },
+      { "name": "Drawing on Cake", "slug": "drawing-on-cake", "image": "/default-image1.jpg", "price": "RM120 – RM300", "sizes": { "5_petite": 120, "6_tall": 300 } }
+    ]
+  },
+  {
+    "id": "bento-cakes",
+    "mainCategory": "birthday",
+    "title": "Bento Cakes",
+    "slug": "Bento Cakes",
+    "cakes": [
+      { "name": "Bento Cake Design Series", "slug": "bento-cake-design-series", "image": "/default-image1.jpg", "price": "RM35 – RM45", "sizes": { "4_inch": "35–45" } },
+      { "name": "Bento Cake + Flowers", "slug": "bento-cake-flowers", "image": "/default-image1.jpg", "price": "RM100 – RM150", "sizes": { "4_inch": "100–150" } }
+    ]
+  },
+  {
+    "id": "kids-cakes",
+    "mainCategory": "birthday",
+    "title": "Kids Cakes",
+    "slug": "Kids Cakes",
+    "cakes": [
+      { "name": "Kids Selection", "slug": "kids-selection", "image": "/default-image1.jpg", "price": "RM120 – RM300", "sizes": { "5_petite": 120, "6_tall": 300 } },
+      { "name": "Kids Selection 2.0", "slug": "kids-selection-2", "image": "/default-image1.jpg", "price": "RM120 – RM280", "sizes": { "5_petite": 120, "6_tall": 280 } },
+      { "name": "Kids Selection 3.0", "slug": "kids-selection-3", "image": "/default-image1.jpg", "price": "RM150 – RM320", "sizes": { "5_petite": 150, "6_tall": 320 } },
+      { "name": "Theme Cakes (Batman, Frozen, Safari, Dino)", "slug": "kids-theme-cakes", "image": "/default-image1.jpg", "price": "RM250 – RM480", "sizes": { "custom": "250–480" } }
+    ]
+  },
+  {
+    "id": "love-shape-cakes",
+    "mainCategory": "birthday",
+    "title": "Love Shape Cakes",
+    "slug": "Love Shape Cakes",
+    "cakes": [
+      { "name": "Love Shape Cake", "slug": "love-shape-cake", "image": "/default-image1.jpg", "price": "RM100 – RM190", "sizes": { "5_inch": 100, "7_inch": 190 } },
+      { "name": "Love Shape Ribbon Cake", "slug": "love-shape-ribbon-cake", "image": "/default-image1.jpg", "price": "RM120 – RM190", "sizes": { "6_inch": "120–190" } }
+    ]
+  },
+  {
+    "id": "square-rectangle-cakes",
+    "mainCategory": "birthday",
+    "title": "Square & Rectangle Cakes",
+    "slug": "Square & Rectangle Cakes",
+    "cakes": [
+      { "name": "Square Cake Design Series", "slug": "square-cake-design-series", "image": "/default-image1.jpg", "price": "RM130 – RM255", "sizes": { "7_inch": 130, "9_inch": 255 } },
+      { "name": "Vintage Square Cake", "slug": "vintage-square-cake", "image": "/default-image1.jpg", "price": "RM140 – RM350", "sizes": { "7_inch": 140, "8_inch": 350 } },
+      { "name": "Rectangle / Sheet Cake", "slug": "rectangle-sheet-cake", "image": "/default-image1.jpg", "price": "RM180 – RM850", "sizes": { "custom": "180–850" } }
+    ]
+  },
+  {
+    "id": "cupcakes-combo-sets",
+    "mainCategory": "birthday",
+    "title": "Cupcakes & Combo Sets",
+    "slug": "Cupcakes & Combo Sets",
+    "cakes": [
+      { "name": "Cupcakes Set", "slug": "cupcakes-set", "image": "/default-image1.jpg", "price": "RM35 – RM100", "sizes": { "4pcs": 35, "12pcs": 100 } },
+      { "name": "Designer Cupcakes", "slug": "designer-cupcakes", "image": "/default-image1.jpg", "price": "RM95 – RM140", "sizes": { "7pcs": 95, "9pcs": 140 } },
+      { "name": "Cake + Cupcakes Set", "slug": "cake-cupcakes-set", "image": "/default-image1.jpg", "price": "RM60 – RM170", "sizes": { "bento_combo": "60–80", "5inch_combo": 170 } }
+    ]
+  },
+  {
+    "id": "dessert-towers",
+    "mainCategory": "birthday",
+    "title": "Dessert Towers",
+    "slug": "Dessert Towers",
+    "cakes": [
+      { "name": "Macarons Tower", "slug": "macarons-tower", "image": "/default-image1.jpg", "price": "RM180 – RM220", "sizes": { "25pcs": 180, "with_flowers": 220 } },
+      { "name": "Choux Tower", "slug": "choux-tower", "image": "/default-image1.jpg", "price": "RM180", "sizes": { "25pcs": 180 } },
+      { "name": "Brownies Tower", "slug": "brownies-tower", "image": "/default-image1.jpg", "price": "RM70 – RM130", "sizes": { "25pcs": 70, "50pcs": 130 } },
+      { "name": "Brownies Truffle Tower", "slug": "brownies-truffle-tower", "image": "/default-image1.jpg", "price": "RM180", "sizes": { "25pcs": 180 } }
+    ]
+  },
+  {
+    "id": "doorgifts",
+    "mainCategory": "birthday",
+    "title": "Doorgifts",
+    "slug": "Doorgifts",
+    "cakes": [
+      { "name": "Brownies Doorgift", "slug": "brownies-doorgift", "image": "/default-image1.jpg", "price": "RM3.50 – RM3.80", "sizes": { "1_200pcs": 3.8, "201_plus": 3.5 } },
+      { "name": "Macarons Doorgift (2pcs)", "slug": "macarons-doorgift", "image": "/default-image1.jpg", "price": "RM7.60 – RM8.00", "sizes": { "1_99pcs": 8.0, "100_plus": 7.6 } },
+      { "name": "Cupcake Doorgift", "slug": "cupcake-doorgift", "image": "/default-image1.jpg", "price": "RM7.80 – RM8.50", "sizes": { "1_200pcs": 8.5, "201_plus": 7.8 } }
     ]
   }
 ]

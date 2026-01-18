@@ -10,7 +10,7 @@ interface ProductCardProps {
 
 export default function ProductCard({ slug, name, price, image }: ProductCardProps) {
   return (
-    <a href={`/catalog/${slug}`} className="group block">
+    <a href={`/product/${slug}`} className="group block">
       <div
         className="relative rounded-3xl bg-white overflow-hidden 
         border border-gray-200 shadow-lg hover:shadow-2xl

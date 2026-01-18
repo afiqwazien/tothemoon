@@ -72,6 +72,7 @@ export default function ProductDetailPage() {
   addToCart({
     id: product.slug,
     name: product.name,
+    slug: product.slug,
     image: product.image,
     size: selectedSize,
     flavour: selectedFlavour,
@@ -104,15 +105,7 @@ export default function ProductDetailPage() {
             <span className="text-slate-500">/</span>
 
             <Link
-              href="/catalog"
-              className="text-slate-300 hover:text-pink-500 transition-colors"
-            >
-              Catalog
-            </Link>
-            <span className="text-slate-500">/</span>
-
-            <Link
-              href={`/catalog?category=${encodeURIComponent(category?.id || "")}`}
+              href={`/catalog/${category?.mainCategory || 'wedding-cakes'}/${category?.id || ''}`}
               className="text-slate-300 hover:text-pink-500 transition-colors"
             >
               {category?.title}
@@ -333,7 +326,7 @@ export default function ProductDetailPage() {
                 .map((cake) => (
                   <Link
                     key={cake.slug}
-                    href={`/catalog/${cake.slug}`}
+                    href={`/product/${cake.slug}`}
                     className="group block rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition"
                   >
                     <div className="relative w-full h-48">

@@ -1,50 +1,58 @@
 "use client";
 
-import { useSearchParams, useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import cakeCatalog from "@/data/catalog.json";
 import ProductCard from "@/components/ui/ProductCard";
 import Header from "@/components/ui/Header";
 import { Suspense, useState } from "react";
 
 export default function Catalog({ onPriceChange }: { onPriceChange?: (price: number) => void }) {
-  const searchParams = useSearchParams();
+  const params = useParams();
   const router = useRouter();
 
-  const selectedSlug = searchParams.get("category") || "All";
-  const selectedId = searchParams.get("category") || "All";
+  const mainCategory = (params?.mainCategory as string) || "";
+  const categoryId = (params?.categoryId as string) || "";
   const [maxPrice, setMaxPrice] = useState(3000);
   // const maxPrice = Number(searchParams.get("maxPrice")) || 1000;
 
-  // Filter products
-  const filteredCategory = cakeCatalog.filter((x) => {
-    const idMatch = selectedId === "All" || x.id === selectedSlug;
-    return idMatch;
-  });
+  // Find the selected category
+  const selectedCategory = cakeCatalog.find(
+    (cat) => cat.mainCategory === mainCategory && cat.id === categoryId
+  );
+
+  // Get categories for sidebar (same main category)
+  const sidebarCategories = cakeCatalog.filter(
+    (cat) => cat.mainCategory === mainCategory
+  );
+
+  // Filter to show selected category or all in main category
+  const filteredCategory = selectedCategory ? [selectedCategory] : sidebarCategories;
 
   // Filter by price (apply to each cake)
   const visibleCakes = filteredCategory.flatMap((category) =>
     category.cakes.filter((cake) => {
-      // Extract numeric value from price string (e.g. "RM 120" → 120)
-      const priceValue = Number(cake.price.replace(/[^\d.]/g, ""));
+      // Extract first numeric value from price string (e.g. "RM3.50 – RM3.80" → 3.50)
+      const priceMatch = cake.price.match(/[\d.]+/);
+      const priceValue = priceMatch ? parseFloat(priceMatch[0]) : 0;
+      
+      console.log(`${cake.name}: price string="${cake.price}", extracted=${priceValue}`); // Debug log
+      
       return priceValue <= maxPrice;
     })
   );
-
-  const updateCategory = (slug: string, id: string = "") => {
-    const params = new URLSearchParams(searchParams);
-    if (slug === "All") {
-      params.delete("category");
-    } else {
-      params.set("category", id);
-    }
-    router.push(`/catalog?${params.toString()}`);
-  };
-
 
   const handleChange = (value: number) => {
     setMaxPrice(value);
     if (onPriceChange) onPriceChange(value); // notify parent if needed
   };
+
+
+  const toTitle = (slug: string) =>
+    slug
+      .replace(/-/g, " ")        // replace dashes with spaces
+      .replace(/\b\w/g, (c) => c.toUpperCase());
+
+  const maintitle = toTitle(mainCategory);
 
   return (
       <div>
@@ -52,63 +60,63 @@ export default function Catalog({ onPriceChange }: { onPriceChange?: (price: num
       <main className="max-w-7xl mx-auto px-6 py-16 mt-4">
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-4xl font-extrabold text-white tracking-tight">
-            Our <span className="text-pink-400 italic">Wedding Cakes</span>
+            {selectedCategory ? (
+              <span className="text-pink-400 italic">{selectedCategory.title}</span>
+            ) : (
+              <>Our <span className="text-pink-400 italic">Catalog</span></>
+            )}
           </h1>
         </div>
 
-        <div className="flex flex-col md:flex-row gap-10">
+        <div className="flex flex-col md:flex-row gap-8">
           {/* Sidebar */}
-          <aside className="md:w-1/4 bg-pink-50 rounded-3xl p-6 shadow-lg h-fit space-y-8">
+          <aside className="md:w-1/5 space-y-6">
             {/* Categories */}
-            <div>
-              <h2 className="text-2xl font-semibold mb-4 text-slate-600">Categories</h2>
-              <ul className="flex flex-col gap-3">
-                <li>
-                  <button
-                    className={`w-full text-left px-4 py-3 rounded-xl transition ${
-                      selectedId === "All"
-                        ? "bg-pink-200 font-semibold shadow-inner"
-                        : "hover:bg-pink-100"
-                    }`}
-                    onClick={() => updateCategory("All")}
-                  >
-                    All
-                  </button>
-                </li>
-                {cakeCatalog.map((category) => (
+            <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-5 shadow-xl">
+              <h2 className="text-sm font-bold mb-4 text-white/90 tracking-wide uppercase">
+                {maintitle}
+              </h2>
+              <ul className="flex flex-col gap-2">
+                {sidebarCategories.map((category) => (
                   <li key={category.id}>
-                    <button
-                      className={`w-full text-left px-4 py-3 rounded-xl transition cursor-pointer ${
-                        selectedId === category.id
-                          ? "bg-pink-200 font-semibold shadow-inner"
-                          : "hover:bg-pink-100"
+                    <a
+                      href={`/catalog/${mainCategory}/${category.id}`}
+                      className={`block px-3 py-2 rounded-lg text-sm transition-all duration-200 ${
+                        categoryId === category.id
+                          ? "bg-gradient-to-r from-pink-500 to-purple-500 text-white font-semibold shadow-md"
+                          : "text-white/80 hover:bg-white/10 hover:text-white hover:pl-4"
                       }`}
-                      onClick={() => updateCategory(category.slug, category.id)}
                     >
                       {category.slug}
-                    </button>
+                    </a>
                   </li>
                 ))}
               </ul>
             </div>
 
             {/* Price Slider */}
-            <div>
-              <h2 className="text-2xl font-semibold mb-4 text-slate-600">Max Price</h2>
+            <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-5 shadow-xl">
+              <h2 className="text-sm font-bold mb-4 text-white/90 tracking-wide uppercase">
+                Price Range
+              </h2>
               <input
                 type="range"
                 min={0}
                 max={3000}
                 value={maxPrice}
                 onChange={(e) => handleChange(Number(e.target.value))}
-                className="w-full"
+                className="w-full h-2 bg-white/20 rounded-lg appearance-none cursor-pointer accent-pink-500"
               />
-              <p className="mt-2 text-gray-700 font-medium">RM {maxPrice}</p>
+              <div className="flex justify-between items-center mt-3">
+                <span className="text-xs text-white/70">RM 0</span>
+                <span className="text-sm font-bold text-white">RM {maxPrice}</span>
+                <span className="text-xs text-white/70">RM 3000</span>
+              </div>
             </div>
           </aside>
 
           {/* Products */}
-            <section className="md:w-3/4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+            <section className="md:w-4/5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {visibleCakes.length === 0 ? (
                 <p className="col-span-full text-center text-gray-500 mt-20">
                   No products found under RM {maxPrice}.

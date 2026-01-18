@@ -5,9 +5,11 @@ import { useEffect, useState } from "react";
 import { useCart } from "@/app/context/CartContext";
 import Image from "next/image";
 import Header from "@/components/ui/Header";
+import { useRouter } from "next/navigation";
 
 export default function CheckoutPage() {
   const { cart, addToCart, removeFromCart } = useCart();
+  const router = useRouter();
 
   const GOOGLE_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
   const SHOP_LAT = Number(process.env.NEXT_PUBLIC_SHOP_LAT || 0);
@@ -54,6 +56,11 @@ export default function CheckoutPage() {
     addToCart({ ...item, quantity: newQty }); // re-add with updated qty
   };
 
+  const deleteItem = (index: number) => {
+    const item = cartItems[index];
+    removeFromCart(item.id);
+  };
+
   const subtotal = cartItems.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0
@@ -93,25 +100,43 @@ export default function CheckoutPage() {
                   {cartItems.map((item, idx) => (
                     <div key={idx} className="flex items-center justify-between py-4">
                       {/* Product Image */}
-                      <Image
-                        src={item.image}
-                        alt={item.name}
-                        width={80}
-                        height={80}
-                        className="w-20 h-20 object-cover rounded-lg border border-slate-600"
-                      />
+                      <button
+                        onClick={() => router.push(`/product/${item.slug}`)}
+                        className="flex-shrink-0 cursor-pointer hover:opacity-80 transition"
+                      >
+                        <Image
+                          src={item.image}
+                          alt={item.name}
+                          width={80}
+                          height={80}
+                          className="w-20 h-20 object-cover rounded-lg border border-slate-600"
+                        />
+                      </button>
 
                       {/* Info */}
                       <div className="flex-1 px-4">
-                        <p className="font-medium">{item.name}</p>
+                        <button
+                          onClick={() => router.push(`/product/${item.slug}`)}
+                          className="font-medium hover:text-pink-400 transition text-left cursor-pointer"
+                        >
+                          {item.name}
+                        </button>
                         <p className="text-sm text-slate-400">
                           Size: {formatSize(item.size)} · Flavour: {item.flavour}
                         </p>
                         <div className="flex items-center gap-3 mt-2">
                           <button
                             type="button"
-                            onClick={() => updateQuantity(idx, item.quantity - 1)}
-                            className="w-8 h-8 flex items-center justify-center rounded border border-slate-600 hover:border-pink-400"
+                            onClick={() => {
+                              if (item.quantity === 1) {
+                                if (confirm(`Remove ${item.name} from cart?`)) {
+                                  deleteItem(idx);
+                                }
+                              } else {
+                                updateQuantity(idx, item.quantity - 1);
+                              }
+                            }}
+                            className="w-8 h-8 flex items-center justify-center cursor-pointer rounded border border-slate-600 hover:border-pink-400 hover:bg-slate-700 transition"
                           >
                             –
                           </button>
@@ -119,17 +144,33 @@ export default function CheckoutPage() {
                           <button
                             type="button"
                             onClick={() => updateQuantity(idx, item.quantity + 1)}
-                            className="w-8 h-8 flex items-center justify-center rounded border border-slate-600 hover:border-pink-400"
+                            className="w-8 h-8 flex items-center cursor-pointer justify-center rounded border border-slate-600 hover:border-pink-400"
                           >
                             +
                           </button>
                         </div>
                       </div>
 
-                      {/* Price */}
-                      <p className="font-semibold text-pink-500 whitespace-nowrap">
-                        RM {item.price * item.quantity}
-                      </p>
+                      {/* Price & Delete */}
+                      <div className="flex flex-col items-end gap-2">
+                        <p className="font-semibold text-pink-500 whitespace-nowrap">
+                          RM {item.price * item.quantity}
+                        </p>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            if (confirm(`Remove ${item.name} from cart?`)) {
+                              deleteItem(idx);
+                            }
+                          }}
+                          className="p-1.5 rounded-lg bg-red-500/10 text-red-400 hover:bg-red-500/20 hover:text-red-300 transition cursor-pointer"
+                          title="Remove item"
+                        >
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                          </svg>
+                        </button>
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -170,8 +211,7 @@ export default function CheckoutPage() {
                   <div className="bg-slate-700 p-4 rounded-lg text-sm text-slate-200">
                   <p className="font-semibold text-pink-400">Pickup Address:</p>
                   <p>
-                      PT 226, Tingkat 1, Bangunan Kedai 4 Unit 3 Tingkat <br />
-                      Bukit Payong, 21400 Marang, Terengganu
+                    LOT PT 8216-A, TINGKAT BAWAH JALAN KUALA BERANG, <br/>MUKIM BUKIT PAYONG, <br/>21400 Marang, Terengganu
                   </p>
                   </div>
               )}
@@ -225,7 +265,7 @@ export default function CheckoutPage() {
                   type="date"
                   value={selectedDate}
                   onChange={(e) => setSelectedDate(e.target.value)}
-                  className="w-full rounded-lg bg-slate-700 border border-slate-600 px-4 py-2 text-slate-100 focus:outline-none focus:ring-2 focus:ring-pink-500"
+                  className="w-full rounded-lg bg-slate-700 border border-slate-600 px-4 py-2 text-slate-100 cursor-pointer focus:outline-none focus:ring-2 focus:ring-pink-500"
                   />
               </div>
 
@@ -238,9 +278,9 @@ export default function CheckoutPage() {
                       key={slot}
                       type="button"
                       onClick={() => setSelectedTimeslot(slot)}
-                      className={`px-3 py-2 rounded-lg border text-sm transition ${
+                      className={`px-3 py-2 rounded-lg border text-sm transition cursor-pointer ${
                           selectedTimeslot === slot
-                          ? "border-pink-500 bg-pink-50 text-pink-600"
+                          ? "border-pink-500 bg-pink-50 text-pink-600" 
                           : "border-slate-600 bg-slate-700 text-slate-200 hover:border-pink-400"
                       }`}
                       >
@@ -295,7 +335,7 @@ export default function CheckoutPage() {
 
             <button
               disabled={!isFormComplete}
-              className={`w-full py-3 px-6 rounded-xl font-semibold text-lg shadow-lg transition ${
+              className={`w-full py-3 px-6 rounded-xl font-semibold text-lg shadow-lg transition cursor-pointer ${
                 isFormComplete
                   ? "bg-pink-600 hover:bg-pink-700 text-white"
                   : "bg-slate-600 text-slate-400 cursor-not-allowed"

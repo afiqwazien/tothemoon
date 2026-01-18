@@ -65,77 +65,99 @@ export default function HomePage() {
       {/* Catalog Sections */}
       <section id="products" className="space-y-16 p-8 w-full mx-auto max-w-7xl">
 
-        {catalog.map((category) => (
-          <motion.div key={category.id}
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="relative h-[350px] md:h-[400px] rounded-2xl overflow-hidden shadow-lg"
-          >
-          <div key={category.id}>
-            <div className="flex justify-between items-center mb-6">
-              <h3 className="text-2xl font-bold text-slate-100">{category.title}</h3>
-              <a
-                href={`/catalog?category=${category.id}`}
-                className="text-slate-100 hover:underline font-medium"
+        {(() => {
+          // Group categories by mainCategory
+          const groupedCategories = catalog.reduce((acc, cat) => {
+            const mainCat = cat.mainCategory || 'wedding-cakes';
+            if (!acc[mainCat]) acc[mainCat] = [];
+            acc[mainCat].push(cat);
+            return acc;
+          }, {} as Record<string, typeof catalog>);
+
+          // Main category display names
+          const mainCategoryNames: Record<string, string> = {
+            'wedding-cakes': 'Wedding Cakes',
+            'desserts': 'Desserts',
+            'hantaran': 'Hantaran',
+            'birthday': 'Birthday Cakes'
+          };
+
+          return Object.entries(groupedCategories).map(([mainCat, categories]) => {
+            // Get first 3 cakes total across all subcategories in this main category
+            const cakesToShow = [];
+            for (const cat of categories) {
+              if (cat.cakes) {
+                cakesToShow.push(...cat.cakes);
+              }
+              if (cakesToShow.length >= 3) break;
+            }
+            const finalCakes = cakesToShow.slice(0, 3); // Only show 3 cakes
+
+            return (
+              <motion.div 
+                key={mainCat}
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+                className="relative rounded-2xl overflow-hidden"
               >
-                {/* Show text on tablet/desktop */}
-                <span className="hidden sm:inline">View More →</span>
-
-                {/* Show arrow only on mobile */}
-                <FaArrowRight className="w-4 h-4 sm:hidden" />
-              </a>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-              {category.cakes.filter((item, index) => index < 3).map((cake) => (
-                <a
-                  key={cake.slug}
-                  href={`/catalog/${cake.slug}`}
-                  className="group block rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition"
-                >
-                  <div className="relative w-full h-50 md:h-60">
-                    <Image
-                      src={cake.image}
-                      alt={cake.name}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                  </div>
-                  {/* <div className="p-4 bg-white">
-                    <h4 className="font-semibold text-lg text-gray-800">{cake.name}</h4>
-                    <p className="text-pink-600 font-medium">{cake.price}</p>
-                  </div> */}
-
-                  <div className="relative p-5 flex flex-col gap-3 bg-white">
-                    <h3
-                      className="text-sm md:text-base font-semibold text-gray-800 group-hover:text-pink-600
-                      transition-colors duration-300 line-clamp-2 leading-snug"
-                    >
-                      {cake.name}
+                <div>
+                  <div className="flex justify-between items-center mb-6">
+                    <h3 className="text-2xl font-bold text-slate-100">
+                      {mainCategoryNames[mainCat] || mainCat}
                     </h3>
-                    
-                    {/* Price with subtle background */}
-                    <div className="flex items-center justify-between">
-                      <span className="text-md font-bold text-pink-600">
-                        {cake.price}
-                      </span>
-                      {/* <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <div className="w-1.5 h-1.5 rounded-full bg-pink-400"></div>
-                        <div className="w-1.5 h-1.5 rounded-full bg-pink-400"></div>
-                        <div className="w-1.5 h-1.5 rounded-full bg-pink-400"></div>
-                      </div> */}
-                    </div>
+                    <a
+                      href={`/catalog/${mainCat}/${categories[0].id}`}
+                      className="text-slate-100 hover:underline font-medium"
+                    >
+                      {/* Show text on tablet/desktop */}
+                      <span className="hidden sm:inline">View More →</span>
+
+                      {/* Show arrow only on mobile */}
+                      <FaArrowRight className="w-4 h-4 sm:hidden" />
+                    </a>
                   </div>
 
-                  
-                </a>
-              ))}
-            </div>
-          </div>
-          </motion.div>
-        ))}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+                    {finalCakes.map((cake) => (
+                      <a
+                        key={cake.slug}
+                        href={`/product/${cake.slug}`}
+                        className="group block rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition"
+                      >
+                        <div className="relative w-full h-50 md:h-60">
+                          <Image
+                            src={cake.image}
+                            alt={cake.name}
+                            fill
+                            className="object-cover group-hover:scale-105 transition-transform duration-300"
+                          />
+                        </div>
+
+                        <div className="relative p-5 flex flex-col gap-3 bg-white">
+                          <h3
+                            className="text-sm md:text-base font-semibold text-gray-800 group-hover:text-pink-600
+                            transition-colors duration-300 line-clamp-2 leading-snug"
+                          >
+                            {cake.name}
+                          </h3>
+                          
+                          {/* Price with subtle background */}
+                          <div className="flex items-center justify-between">
+                            <span className="text-md font-bold text-pink-600">
+                              {cake.price}
+                            </span>
+                          </div>
+                        </div>
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            );
+          });
+        })()}
       </section>
 
       <ContactSection />

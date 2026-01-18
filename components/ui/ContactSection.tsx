@@ -24,7 +24,7 @@ export default function AboutSection() {
             <div className="space-y-4">
                 <p>
                 📍 <span className="font-medium">TastiePastry HQ</span><br/>
-                PT 226, Tingkat 1, Bangunan Kedai 4 Unit 3 Tingkat Bukit Payong, 21400 Marang, Terengganu
+                    LOT PT 8216-A, TINGKAT BAWAH JALAN KUALA BERANG, MUKIM BUKIT PAYONG, 21400 Marang, Terengganu
                 </p>
                 <p>📞 <a href="tel:+6012XXXXXXX" className="hover:underline">+60 12-XXX XXXX</a></p>
                 <p>📧 <a href="mailto:hello@tastiepastry.com" className="hover:underline">hello.tastiepastry@gmail.com</a></p>
