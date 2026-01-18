@@ -31,11 +31,8 @@ export default function Catalog({ onPriceChange }: { onPriceChange?: (price: num
   // Filter by price (apply to each cake)
   const visibleCakes = filteredCategory.flatMap((category) =>
     category.cakes.filter((cake) => {
-      // Extract first numeric value from price string (e.g. "RM3.50 – RM3.80" → 3.50)
       const priceMatch = cake.price.match(/[\d.]+/);
       const priceValue = priceMatch ? parseFloat(priceMatch[0]) : 0;
-      
-      console.log(`${cake.name}: price string="${cake.price}", extracted=${priceValue}`); // Debug log
       
       return priceValue <= maxPrice;
     })
