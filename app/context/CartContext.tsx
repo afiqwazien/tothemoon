@@ -17,6 +17,7 @@ type CartContextType = {
   cart: CartItem[];
   addToCart: (item: CartItem) => void;
   removeFromCart: (id: string) => void;
+  updateQuantity: (id: string, size: string, flavour: string, quantity: number) => void; // ✅ new
   clearCart: () => void;
 };
 
@@ -37,6 +38,16 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
+
+  const updateQuantity = (id: string, size: string, flavour: string, quantity: number) => {
+    setCart((prev) =>
+      prev.map((item) =>
+        item.id === id && item.size === size && item.flavour === flavour
+          ? { ...item, quantity }
+          : item
+      )
+    );
+  };
 
   const addToCart = (item: CartItem) => {
     setCart((prev) => {
@@ -62,7 +73,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   const clearCart = () => setCart([]);
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart, clearCart }}>
+    <CartContext.Provider value={{ cart, addToCart, removeFromCart, updateQuantity, clearCart }}>
       {children}
     </CartContext.Provider>
   );
