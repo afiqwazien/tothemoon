@@ -4,10 +4,11 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import React from "react";
 import AboutSection from "@/components/ui/AboutSection";
 import ContactSection from "@/components/ui/ContactSection";
-import catalog from "@/data/catalog.json";
 import { motion } from "framer-motion";
 import Header from "@/components/ui/Header";
 import { FaArrowRight } from "react-icons/fa";
+import { useCatalog } from "@/app/context/CatalogContext";
+import { FullPageSkeleton } from "@/components/ui/LoadingSkeletons";
 
 const backgroundSlides = [
   { src: "/bg-image1.jpg", alt: "Designer Wedding Cake" },
@@ -16,6 +17,8 @@ const backgroundSlides = [
 ];
 
 export default function HomePage() {
+  const { catalog, loading } = useCatalog();
+
   return (
     <div className="">
       {/* Slider with Nav */}
@@ -65,7 +68,9 @@ export default function HomePage() {
       {/* Catalog Sections */}
       <section id="products" className="space-y-16 p-8 w-full mx-auto max-w-7xl">
 
-        {(() => {
+        {loading ? (
+          <FullPageSkeleton />
+        ) : (() => {
           // Group categories by mainCategory
           const groupedCategories = catalog.reduce((acc, cat) => {
             const mainCat = cat.mainCategory || 'wedding-cakes';
@@ -127,12 +132,12 @@ export default function HomePage() {
                         className="group block rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition"
                       >
                         <div className="relative w-full h-50 md:h-60">
-                          <Image
-                            src={cake.image}
-                            alt={cake.name}
-                            fill
-                            className="object-cover group-hover:scale-105 transition-transform duration-300"
-                          />
+                            <Image
+                              src={cake.images?.[0] || cake.image || ''}
+                              alt={cake.name}
+                              fill
+                              className="object-cover group-hover:scale-105 transition-transform duration-300"
+                            />
                         </div>
 
                         <div className="relative p-5 flex flex-col gap-3 bg-white">

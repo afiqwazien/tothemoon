@@ -6,8 +6,9 @@ import Link from "next/link";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import Header from "@/components/ui/Header";
-import cakeCatalog from "@/data/catalog.json";
 import flavours from "@/data/flavours.json";
+import { useCatalog } from "@/app/context/CatalogContext";
+import { FullPageSkeleton } from "@/components/ui/LoadingSkeletons";
 import {
   Tooltip,
   TooltipTrigger,
@@ -27,12 +28,26 @@ export default function ProductDetailPage() {
   const [selectedFlavour, setSelectedFlavour] = useState(flavours[0].name);
   const [quantity, setQuantity] = useState(1);
   const [activeFlavour, setActiveFlavour] = useState<string | null>(null);
+  const [selectedSize, setSelectedSize] = useState<string>("");
+  const [mainImage, setMainImage] = useState<string | null>(null);
+  const { catalog: cakeCatalog, loading } = useCatalog();
+  const { addToCart } = useCart();
 
   const handleFlavourClick = (flavourName: string) => {
     setSelectedFlavour(flavourName);
     setActiveFlavour((prev) => (prev === flavourName ? null : flavourName)); // toggle tooltip for mobile
   };
 
+  if (loading) {
+    return (
+      <div>
+        <Header />
+        <main className="max-w-7xl mx-auto px-6 py-16 mt-4">
+          <FullPageSkeleton />
+        </main>
+      </div>
+    );
+  }
 
   // Find the product by slug
   let product = null;
@@ -50,8 +65,38 @@ export default function ProductDetailPage() {
   if (!product) {
     notFound();
   }
-  const sizeKeys = Object.keys(product.sizes);
-  const [selectedSize, setSelectedSize] = useState(sizeKeys[0]);
+  
+  // Handle Firebase array->object conversion or standard arrays
+  let parsedSizes: any[] = [];
+  if (Array.isArray(product.sizes)) {
+    parsedSizes = product.sizes;
+  } else if (product.sizes && typeof product.sizes === 'object') {
+    const vals = Object.values(product.sizes);
+    if (vals.length > 0 && typeof vals[0] === 'object' && vals[0] !== null) {
+      // Firebase parsed it as { "0": {...}, "1": {...} }
+      parsedSizes = vals as any[];
+    } else {
+      // Old structure { "5_Tall": 230 }
+      parsedSizes = Object.entries(product.sizes).map(([key, val]) => ({
+        name: key.replace(/_/g, " "),
+        price: Number(val)
+      }));
+    }
+  }
+
+  // Normalize final format to {name, price}
+  const normalizedSizes = parsedSizes.map((s: any) => {
+    // If it's the old mapped one, it already has name and price
+    if (s.name !== undefined && s.price !== undefined && !s.variant) return s;
+
+    return {
+      name: s.variant ? `${s.height ? s.height + '" ' : ''}${s.variant}` : s.name || 'Standard',
+      price: Number(s.price || 0)
+    };
+  });
+
+  const activeSizeIndex = selectedSize ? parseInt(selectedSize) : 0;
+  const activeSizeObj = normalizedSizes[activeSizeIndex] || normalizedSizes[0];
 
   // Mock additional product data (you can extend your JSON structure)
   const productDetails = {
@@ -66,18 +111,16 @@ export default function ProductDetailPage() {
     deliveryTime: "2-3 business days"
   };
 
-  const { addToCart } = useCart();
-
   const handleAddToCart = () => {
   addToCart({
     id: product.slug,
     name: product.name,
     slug: product.slug,
-    image: product.image,
-    size: selectedSize,
+    image: product.images?.[0] || product.image || '',
+    size: activeSizeObj?.name || 'Standard',
     flavour: selectedFlavour,
     quantity,
-    price: Number(product.sizes[selectedSize as keyof typeof product.sizes]),
+    price: activeSizeObj?.price || 0,
   });
 
   // Show success toast
@@ -127,7 +170,7 @@ export default function ProductDetailPage() {
           >
             <div className="relative w-full h-96 lg:h-[500px] rounded-2xl overflow-hidden shadow-lg">
               <Image
-                src={product.image}
+                src={mainImage || product.images?.[0] || product.image || ''}
                 alt={product.name}
                 fill
                 priority
@@ -135,19 +178,26 @@ export default function ProductDetailPage() {
               />
             </div>
             
-            {/* Additional product images could go here */}
-            <div className="grid grid-cols-3 gap-4">
-              {[1, 2, 3].map((i) => (
-                <div key={i} className="relative w-full h-24 rounded-lg overflow-hidden bg-gray-100">
-                  <Image
-                    src={product.image}
-                    alt={`${product.name} view ${i}`}
-                    fill
-                    className="object-cover opacity-60 hover:opacity-100 transition cursor-pointer"
-                  />
-                </div>
-              ))}
-            </div>
+            {/* Additional product images */}
+            {product.images && product.images.length > 1 && (
+              <div className="grid grid-cols-3 gap-4">
+                {product.images.map((imgUrl, i) => (
+                  <div key={i} className="relative w-full h-24 rounded-lg overflow-hidden bg-gray-100">
+                    <Image
+                      src={imgUrl}
+                      alt={`${product.name} view ${i + 1}`}
+                      fill
+                      onClick={() => setMainImage(imgUrl)}
+                      className={`object-cover transition cursor-pointer ${
+                        (mainImage || product.images?.[0]) === imgUrl 
+                          ? "opacity-100 ring-2 ring-pink-500" 
+                          : "opacity-60 hover:opacity-100"
+                      }`}
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
           </motion.div>
 
           {/* Product Information - Right Side */}
@@ -169,7 +219,7 @@ export default function ProductDetailPage() {
 
             {/* Price */}
             <div className="text-2xl font-semibold text-pink-600">
-              RM {product.sizes[selectedSize as keyof typeof product.sizes]}
+              RM {activeSizeObj?.price}
             </div>
 
 
@@ -184,18 +234,18 @@ export default function ProductDetailPage() {
             <div className="space-y-3">
               <h3 className="text-lg font-semibold text-slate-200">Size</h3>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                {Object.entries(product.sizes).map(([sizeName, price]) => (
+                {normalizedSizes.map((sizeObj, index) => (
                   <button
-                    key={sizeName}
-                    onClick={() => setSelectedSize(sizeName)}
+                    key={index}
+                    onClick={() => setSelectedSize(index.toString())}
                     className={`p-3 rounded-lg border-2 text-center transition cursor-pointer ${
-                      selectedSize === sizeName
+                      activeSizeIndex === index
                         ? "bg-pink-100 text-pink-700 shadow-md scale-105"
                         : "border-gray-600 text-slate-100 hover:border-pink-300"
                     }`}
                   >
-                    <div className="font-medium">{sizeName.replace("_", " ")}</div>
-                    <div className="text-sm font-semibold text-pink-600">RM {price}</div>
+                    <div className="font-medium">{sizeObj.name}</div>
+                    <div className="text-sm font-semibold text-pink-600">RM {sizeObj.price}</div>
                   </button>
                 ))}
               </div>
@@ -331,7 +381,7 @@ export default function ProductDetailPage() {
                   >
                     <div className="relative w-full h-48">
                       <Image
-                        src={cake.image}
+                        src={cake.images?.[0] || cake.image || ''}
                         alt={cake.name}
                         fill
                         className="object-cover group-hover:scale-105 transition-transform duration-300"

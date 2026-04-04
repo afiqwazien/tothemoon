@@ -1,10 +1,11 @@
 "use client";
 
 import { useParams, useRouter } from "next/navigation";
-import cakeCatalog from "@/data/catalog.json";
 import ProductCard from "@/components/ui/ProductCard";
 import Header from "@/components/ui/Header";
 import { Suspense, useState } from "react";
+import { useCatalog } from "@/app/context/CatalogContext";
+import { FullPageSkeleton } from "@/components/ui/LoadingSkeletons";
 
 export default function Catalog({ onPriceChange }: { onPriceChange?: (price: number) => void }) {
   const params = useParams();
@@ -13,6 +14,19 @@ export default function Catalog({ onPriceChange }: { onPriceChange?: (price: num
   const mainCategory = (params?.mainCategory as string) || "";
   const categoryId = (params?.categoryId as string) || "";
   const [maxPrice, setMaxPrice] = useState(3000);
+  const { catalog: cakeCatalog, loading } = useCatalog();
+
+  if (loading) {
+    return (
+      <div>
+        <Header />
+        <main className="max-w-7xl mx-auto px-6 py-16 mt-4">
+          <FullPageSkeleton />
+        </main>
+      </div>
+    );
+  }
+
   // const maxPrice = Number(searchParams.get("maxPrice")) || 1000;
 
   // Find the selected category
@@ -125,7 +139,7 @@ export default function Catalog({ onPriceChange }: { onPriceChange?: (price: num
                     slug={cake.slug}
                     name={cake.name}
                     price={cake.price}
-                    image={cake.image}
+                    image={cake.images?.[0] || cake.image || ''}
                   />
                 ))
               )}

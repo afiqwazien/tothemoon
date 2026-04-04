@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Footer from "@/components/ui/Footer";
 import { CartProvider } from "@/app/context/CartContext";
+import { CatalogProvider } from "@/app/context/CatalogContext";
 import { Toaster } from "sonner";
 
 
@@ -19,7 +20,9 @@ export default function RootLayout({
     <html lang="en">
       <body className="bg-slate-700 min-h-screen text-gray-800">
 
-        <CartProvider>{children}</CartProvider>
+        <CatalogProvider>
+          <CartProvider>{children}</CartProvider>
+        </CatalogProvider>
 
         {/* Footer */}
         <Footer />

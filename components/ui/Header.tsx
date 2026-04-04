@@ -11,7 +11,8 @@ import {
   SheetTrigger,
   SheetTitle,
 } from "@/components/ui/sheet"
-import catalog from "@/data/catalog.json";
+import { useCatalog } from "@/app/context/CatalogContext";
+import { ShopDropdownSkeleton } from "@/components/ui/LoadingSkeletons";
 import React from "react";
 import { ShoppingCart, Menu, X, ChevronDown } from "lucide-react";
 import { useCart } from "@/app/context/CartContext";
@@ -20,6 +21,7 @@ import CartPreview from "./CartPreview";
 
 export default function Header() {
     const { cart } = useCart();
+    const { catalog, loading } = useCatalog();
     const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
     const [mobileShopOpen, setMobileShopOpen] = React.useState(false);
     // NEW: State for mobile Details accordion
@@ -131,21 +133,23 @@ export default function Header() {
                         }`}
                     >
                       <div className="flex flex-col space-y-4 pl-2 py-2">
-                        {/* Group categories by mainCategory */}
-                        {Object.entries(
-                          catalog.reduce((acc, cat) => {
-                            const mainCat = cat.mainCategory || 'wedding-cakes';
-                            if (!acc[mainCat]) acc[mainCat] = [];
-                            acc[mainCat].push(cat);
-                            return acc;
-                          }, {} as Record<string, typeof catalog>)
-                        ).map(([mainCat, categories]) => {
-                          const mainCategoryNames: Record<string, string> = {
-                            'wedding-cakes': 'Wedding Cakes',
-                            'desserts': 'Desserts',
-                            'hantaran': 'Hantaran',
-                            'birthday': 'Birthday Cakes'
-                          };
+                        {loading ? (
+                           <div className="text-gray-500 text-sm py-4 px-2">Loading catalog...</div>
+                        ) : (
+                          Object.entries(
+                            catalog.reduce((acc, cat) => {
+                              const mainCat = cat.mainCategory || 'wedding-cakes';
+                              if (!acc[mainCat]) acc[mainCat] = [];
+                              acc[mainCat].push(cat);
+                              return acc;
+                            }, {} as Record<string, typeof catalog>)
+                          ).map(([mainCat, categories]) => {
+                            const mainCategoryNames: Record<string, string> = {
+                              'wedding-cakes': 'Wedding Cakes',
+                              'desserts': 'Desserts',
+                              'hantaran': 'Hantaran',
+                              'birthday': 'Birthday Cakes'
+                            };
 
                           return (
                             <div key={mainCat} className="space-y-2">
@@ -169,7 +173,8 @@ export default function Header() {
                               </div>
                             </div>
                           );
-                        })}
+                        })
+                      )}
                       </div>
                     </div>
                   </div>
@@ -241,6 +246,7 @@ export default function Header() {
 export function ShopDropdown() {
   const [open, setOpen] = React.useState(false)
   const closeTimer = React.useRef<NodeJS.Timeout | null>(null)
+  const { catalog, loading } = useCatalog();
 
   const handleOpen = () => {
     if (closeTimer.current) clearTimeout(closeTimer.current)
@@ -289,29 +295,33 @@ export function ShopDropdown() {
         onMouseLeave={handleClose}
         className="w-[95vw] max-w-6xl rounded-2xl bg-white/95 backdrop-blur-md shadow-2xl border border-gray-100 p-8 transition-all duration-300 data-[state=closed]:opacity-0 data-[state=closed]:translate-y-2 data-[state=open]:opacity-100 data-[state=open]:translate-y-0"
       >
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-          {Object.entries(groupedCategories).map(([mainCat, categories]) => (
-            <div key={mainCat} className="space-y-3">
-              {/* Main Category Header */}
-              <h3 className="text-sm font-bold text-pink-600 uppercase tracking-wide border-b border-pink-200 pb-2">
-                {mainCategoryNames[mainCat] || mainCat}
-              </h3>
+        {loading ? (
+          <ShopDropdownSkeleton />
+        ) : (
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+            {Object.entries(groupedCategories).map(([mainCat, categories]) => (
+              <div key={mainCat} className="space-y-3">
+                {/* Main Category Header */}
+                <h3 className="text-sm font-bold text-pink-600 uppercase tracking-wide border-b border-pink-200 pb-2">
+                  {mainCategoryNames[mainCat] || mainCat}
+                </h3>
 
-              {/* Subcategories */}
-              <div className="space-y-1">
-                {categories.map((category) => (
-                  <Link
-                    key={category.id}
-                    href={`/catalog/${mainCat}/${category.id}`}
-                    className="block px-3 py-2 text-sm text-gray-700 hover:bg-pink-50 hover:text-pink-600 rounded-lg transition-all duration-200 hover:translate-x-1"
-                  >
-                    {category.slug}
-                  </Link>
-                ))}
+                {/* Subcategories */}
+                <div className="space-y-1">
+                  {categories.map((category) => (
+                    <Link
+                      key={category.id}
+                      href={`/catalog/${mainCat}/${category.id}`}
+                      className="block px-3 py-2 text-sm text-gray-700 hover:bg-pink-50 hover:text-pink-600 rounded-lg transition-all duration-200 hover:translate-x-1"
+                    >
+                      {category.slug}
+                    </Link>
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </PopoverContent>
     </Popover>
   )
