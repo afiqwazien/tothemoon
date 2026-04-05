@@ -141,8 +141,8 @@ export default function CheckoutAddressInput({ onPlaceSelect }: Props) {
           onClick={() => setModalOpen(true)}
           className={`flex items-center gap-2 px-4 py-2.5 rounded-lg border text-sm transition cursor-pointer ${
             confirmedAddress
-              ? "border-pink-500/50 bg-pink-500/10 text-pink-400 hover:bg-pink-500/20"
-              : "border-slate-600 bg-slate-700 text-slate-200 hover:border-pink-400 hover:bg-slate-600"
+              ? "border-[#312821]/50 bg-[#312821]/10 text-slate-200 hover:bg-[#312821]/20"
+              : "border-slate-600 bg-slate-700 text-slate-200 hover:border-[#312821] hover:bg-slate-600"
           }`}
         >
           <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -151,7 +151,7 @@ export default function CheckoutAddressInput({ onPlaceSelect }: Props) {
           </svg>
           {confirmedAddress ? "Change Location" : "Pick on Map"}
           {confirmedAddress && (
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5 ml-1 text-pink-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5 ml-1 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
             </svg>
           )}
@@ -159,8 +159,8 @@ export default function CheckoutAddressInput({ onPlaceSelect }: Props) {
 
         {confirmedAddress && (
           <div className="bg-slate-700/60 border border-slate-600 rounded-xl px-4 py-3 text-sm text-slate-200 flex items-start gap-3">
-            <div className="mt-0.5 bg-pink-500/20 rounded-full p-1 shrink-0">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5 text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div className="mt-0.5 bg-[#312821]/40 rounded-full p-1 shrink-0">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5 text-slate-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
@@ -180,7 +180,7 @@ export default function CheckoutAddressInput({ onPlaceSelect }: Props) {
 
             {/* Modal header */}
             <div className="flex items-center justify-between px-5 py-4 border-b border-slate-700">
-              <h3 className="text-lg font-semibold text-pink-400">Pin Your Location</h3>
+              <h3 className="text-lg font-bold text-slate-200">Pin Your Location</h3>
               <button
                 type="button"
                 onClick={handleClose}
@@ -211,7 +211,7 @@ export default function CheckoutAddressInput({ onPlaceSelect }: Props) {
               )}
               {pendingAddress && !loading && (
                 <div className="bg-slate-700 rounded-lg px-4 py-3 text-sm text-slate-200 flex items-start gap-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mt-0.5 text-pink-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mt-0.5 text-[#312821] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
@@ -231,9 +231,9 @@ export default function CheckoutAddressInput({ onPlaceSelect }: Props) {
                   type="button"
                   onClick={handleConfirm}
                   disabled={!pendingAddress || loading}
-                  className={`flex-1 py-2 rounded-xl font-semibold text-sm transition cursor-pointer ${
+                  className={`flex-1 py-2 rounded-xl font-black text-sm transition cursor-pointer ${
                     pendingAddress && !loading
-                      ? "bg-pink-600 hover:bg-pink-700 text-white"
+                      ? "bg-[#312821] hover:bg-[#1A1512] text-white"
                       : "bg-slate-600 text-slate-400 cursor-not-allowed"
                   }`}
                 >

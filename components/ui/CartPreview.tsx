@@ -21,7 +21,7 @@ export default function CartPreview() {
         <p className="text-gray-500 mb-4">Your cart is empty</p>
         <Link
           href="/catalog/wedding-cakes/floral-cakes"
-          className="text-pink-600 hover:text-pink-700 font-medium text-sm"
+          className="text-[#312821] hover:text-[#1A1512] font-bold text-sm"
         >
           Start Shopping →
         </Link>
@@ -50,7 +50,7 @@ export default function CartPreview() {
               <div className="flex-1 min-w-0">
                 <Link
                   href={`/product/${item.slug}`}
-                  className="font-medium text-sm text-gray-800 hover:text-pink-600 line-clamp-1"
+                  className="font-bold text-sm text-slate-800 hover:text-[#312821] line-clamp-1"
                 >
                   {item.name}
                 </Link>
@@ -59,7 +59,7 @@ export default function CartPreview() {
                 </p>
                 <div className="flex items-center justify-between mt-2">
                   <span className="text-xs text-gray-600">Qty: {item.quantity}</span>
-                  <span className="text-sm font-semibold text-pink-600">
+                  <span className="text-sm font-bold text-[#312821]">
                     RM {item.price * item.quantity}
                   </span>
                 </div>
@@ -82,12 +82,12 @@ export default function CartPreview() {
       <div className="border-t border-gray-200 p-4 bg-gray-50 space-y-3">
         <div className="flex justify-between items-center">
           <span className="text-sm font-medium text-gray-700">Subtotal</span>
-          <span className="text-lg font-bold text-pink-600">RM {subtotal}</span>
+          <span className="text-lg font-black text-[#312821]">RM {subtotal}</span>
         </div>
         
         <Link
           href="/checkout"
-          className="block w-full bg-pink-600 text-white text-center py-2.5 rounded-lg font-semibold hover:bg-pink-700 transition"
+          className="block w-full bg-[#312821] text-white text-center py-2.5 rounded-lg font-black hover:bg-[#1A1512] transition"
         >
           View Cart & Checkout
         </Link>

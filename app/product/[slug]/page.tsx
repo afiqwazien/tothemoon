@@ -41,7 +41,7 @@ export default function ProductDetailPage() {
   if (loading) {
     return (
       <div>
-        <Header />
+        <Header variant="dark" />
         <main className="max-w-7xl mx-auto px-6 py-16 mt-4">
           <FullPageSkeleton />
         </main>
@@ -65,7 +65,7 @@ export default function ProductDetailPage() {
   if (!product) {
     notFound();
   }
-  
+
   // Handle Firebase array->object conversion or standard arrays
   let parsedSizes: any[] = [];
   if (Array.isArray(product.sizes)) {
@@ -112,57 +112,57 @@ export default function ProductDetailPage() {
   };
 
   const handleAddToCart = () => {
-  addToCart({
-    id: product.slug,
-    name: product.name,
-    slug: product.slug,
-    image: product.images?.[0] || product.image || '',
-    size: activeSizeObj?.name || 'Standard',
-    flavour: selectedFlavour,
-    quantity,
-    price: activeSizeObj?.price || 0,
-  });
+    addToCart({
+      id: product.slug,
+      name: product.name,
+      slug: product.slug,
+      image: product.images?.[0] || product.image || '',
+      size: activeSizeObj?.name || 'Standard',
+      flavour: selectedFlavour,
+      quantity,
+      price: activeSizeObj?.price || 0,
+    });
 
-  // Show success toast
+    // Show success toast
     toast.success("Added to cart!", {
       description: "Item successfully added to your shopping cart 🛍️",
       icon: <ShoppingCart className="w-5 h-5" />,
       duration: 3000,
     })
-};
+  };
 
   return (
     <div>
-      <Header />
-      
+      <Header variant="dark" />
+
       <main className="max-w-7xl mx-auto px-6 py-16 mt-4">
         {/* Breadcrumb */}
         <nav className="mb-8">
           <div className="flex items-center space-x-2 text-sm">
             <Link
               href="/"
-              className="text-slate-300 hover:text-pink-500 transition-colors"
+              className="text-slate-400 hover:text-[#312821] transition-colors"
             >
               Home
             </Link>
-            <span className="text-slate-500">/</span>
+            <span className="text-slate-400">/</span>
 
             <Link
               href={`/catalog/${category?.mainCategory || 'wedding-cakes'}/${category?.id || ''}`}
-              className="text-slate-300 hover:text-pink-500 transition-colors"
+              className="text-slate-400 hover:text-[#312821] transition-colors"
             >
               {category?.title}
             </Link>
-            <span className="text-slate-500">/</span>
+            <span className="text-slate-400">/</span>
 
-            <span className="text-slate-500">{product.name}</span>
+            <span className="text-slate-500 font-medium">{product.name}</span>
           </div>
         </nav>
 
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
           {/* Product Image - Left Side */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
@@ -177,7 +177,7 @@ export default function ProductDetailPage() {
                 className="object-cover"
               />
             </div>
-            
+
             {/* Additional product images */}
             {product.images && product.images.length > 1 && (
               <div className="grid grid-cols-3 gap-4">
@@ -188,11 +188,10 @@ export default function ProductDetailPage() {
                       alt={`${product.name} view ${i + 1}`}
                       fill
                       onClick={() => setMainImage(imgUrl)}
-                      className={`object-cover transition cursor-pointer ${
-                        (mainImage || product.images?.[0]) === imgUrl 
-                          ? "opacity-100 ring-2 ring-pink-500" 
+                      className={`object-cover transition cursor-pointer ${(mainImage || product.images?.[0]) === imgUrl
+                          ? "opacity-100 ring-2 ring-[#312821]"
                           : "opacity-60 hover:opacity-100"
-                      }`}
+                        }`}
                     />
                   </div>
                 ))}
@@ -201,7 +200,7 @@ export default function ProductDetailPage() {
           </motion.div>
 
           {/* Product Information - Right Side */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -209,43 +208,43 @@ export default function ProductDetailPage() {
           >
             {/* Product Title and Category */}
             <div>
-              <span className="inline-block px-3 py-1 bg-pink-100 text-pink-600 rounded-full text-sm font-medium mb-4">
+              <span className="inline-block px-3 py-1 bg-slate-100 text-[#312821] rounded-full text-sm font-bold mb-4">
                 {category?.title}
               </span>
-              <h1 className="text-3xl lg:text-4xl font-bold text-slate-100 mb-4">
+              <h1 className="text-3xl lg:text-4xl font-extrabold text-slate-900 mb-4">
                 {product.name}
               </h1>
             </div>
 
             {/* Price */}
-            <div className="text-2xl font-semibold text-pink-600">
+            <div className="text-2xl font-black text-[#312821]">
               RM {activeSizeObj?.price}
             </div>
 
 
             {/* Description */}
             <div className="space-y-4">
-              <p className="text-slate-100 leading-relaxed">
+              <p className="text-slate-700 leading-relaxed text-lg">
                 {productDetails.description}
               </p>
             </div>
 
-            {/* Size Selection */}
             <div className="space-y-3">
-              <h3 className="text-lg font-semibold text-slate-200">Size</h3>
+              <h3 className="text-lg font-bold text-slate-900">Size</h3>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                 {normalizedSizes.map((sizeObj, index) => (
                   <button
                     key={index}
                     onClick={() => setSelectedSize(index.toString())}
-                    className={`p-3 rounded-lg border-2 text-center transition cursor-pointer ${
-                      activeSizeIndex === index
-                        ? "bg-pink-100 text-pink-700 shadow-md scale-105"
-                        : "border-gray-600 text-slate-100 hover:border-pink-300"
-                    }`}
+                    className={`p-3 rounded-xl border-2 text-center transition cursor-pointer group ${activeSizeIndex === index
+                        ? "bg-[#312821] text-white shadow-md scale-105 border-[#312821]"
+                        : "border-slate-100 bg-white text-slate-700 hover:border-slate-300"
+                      }`}
                   >
-                    <div className="font-medium">{sizeObj.name}</div>
-                    <div className="text-sm font-semibold text-pink-600">RM {sizeObj.price}</div>
+                    <div className="font-bold text-lg">{sizeObj.name}</div>
+                    <div className={`text-sm font-black ${activeSizeIndex === index ? 'text-white/90' : 'text-[#312821]'}`}>
+                      RM {sizeObj.price}
+                    </div>
                   </button>
                 ))}
               </div>
@@ -253,75 +252,77 @@ export default function ProductDetailPage() {
 
             {/* Flavour Selection */}
             <div className="space-y-3">
-            <h3 className="text-lg font-semibold text-slate-200">Flavour</h3>
-            <TooltipProvider>
-              <div className="flex flex-wrap gap-3">
-                {flavours.map((flavour) => {
-                  const isSelected = selectedFlavour === flavour.name;
-                  const isActive = activeFlavour === flavour.name;
+              <h3 className="text-lg font-bold text-slate-900">Flavour</h3>
+              <TooltipProvider>
+                <div className="flex flex-wrap gap-3">
+                  {flavours.map((flavour) => {
+                    const isSelected = selectedFlavour === flavour.name;
+                    const isActive = activeFlavour === flavour.name;
 
-                  return (
-                    <div key={flavour.name} className="relative">
-                      <Tooltip open={isActive ? true : undefined}>
-                        <TooltipTrigger asChild>
-                          <button
-                            type="button"
-                            onClick={() => handleFlavourClick(flavour.name)}
-                            className={`inline-block px-3 py-1 rounded-full text-sm font-medium transition cursor-pointer ${
-                              isSelected
-                                ? "bg-pink-100 text-pink-700 shadow-md scale-105"
-                                : "bg-white text-slate-700 hover:bg-pink-100 hover:text-pink-600"
-                            }`}
+                    return (
+                      <div key={flavour.name} className="relative">
+                        <Tooltip open={isActive ? true : undefined}>
+                          <TooltipTrigger asChild>
+                            <button
+                              type="button"
+                              onClick={() => handleFlavourClick(flavour.name)}
+                              className={`inline-block px-4 py-1.5 rounded-full text-sm font-semibold transition cursor-pointer ${isSelected
+                                  ? "bg-[#312821] text-white shadow-lg scale-105"
+                                  : "bg-white text-slate-700 border border-slate-100 hover:border-[#312821] hover:text-[#312821] shadow-sm"
+                                }`}
+                            >
+                              {flavour.name}
+                            </button>
+                          </TooltipTrigger>
+
+                          <TooltipContent
+                            className="max-w-xs bg-[#fefdf1] text-[#312821] border border-slate-200 rounded-xl p-4 shadow-2xl z-50"
+                            side="top"
+                            sideOffset={10}
                           >
-                            {flavour.name}
-                          </button>
-                        </TooltipTrigger>
+                            <div className="flex items-start gap-3">
+                              {/* Swatch Preview */}
+                              <div className="flex flex-col w-16 h-16 rounded overflow-hidden border border-slate-200">
+                                {Array.from({ length: 5 }).map((_, i) => {
+                                  const [color1, color2] = flavour.colors;
+                                  return (
+                                    <div
+                                      key={i}
+                                      className={`flex-1 ${i % 2 === 0 ? color1 : color2}`}
+                                    />
+                                  );
+                                })}
+                              </div>
 
-                        <TooltipContent
-                          className="max-w-xs bg-slate-800 text-slate-100 border border-slate-600 rounded-lg p-3 shadow-lg z-50"
-                          side="top"
-                        >
-                          <div className="flex items-start gap-3">
-                            {/* Swatch Preview */}
-                            <div className="flex flex-col w-16 h-16 rounded overflow-hidden border border-slate-700">
-                              {Array.from({ length: 5 }).map((_, i) => {
-                                const [color1, color2] = flavour.colors;
-                                return (
-                                  <div
-                                    key={i}
-                                    className={`flex-1 ${i % 2 === 0 ? color1 : color2}`}
-                                  />
-                                );
-                              })}
+                              {/* Description */}
+                              <p className="text-sm font-semibold leading-relaxed tracking-tight text-[#312821]">
+                                {flavour.description}
+                              </p>
                             </div>
-
-                            {/* Description */}
-                            <p className="text-sm leading-relaxed">{flavour.description}</p>
-                          </div>
-                        </TooltipContent>
-                      </Tooltip>
-                    </div>
-                  );
-                })}
-              </div>
-            </TooltipProvider>
-          </div>
+                          </TooltipContent>
+                        </Tooltip>
+                      </div>
+                    );
+                  })}
+                </div>
+              </TooltipProvider>
+            </div>
 
 
             {/* Quantity Selection */}
             <div className="space-y-3">
-              <h3 className="text-lg font-semibold text-slate-100">Quantity</h3>
-              <div className="flex items-center space-x-3">
+              <h3 className="text-lg font-bold text-slate-900">Quantity</h3>
+              <div className="flex items-center space-x-4">
                 <button
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                  className="w-10 h-10 rounded-lg border border-gray-300 text-slate-100 flex items-center justify-center hover:bg-gray-50 transition cursor-pointer"
+                  className="w-12 h-12 rounded-xl border border-slate-200 text-slate-700 flex items-center justify-center hover:bg-slate-50 transition cursor-pointer font-bold text-xl shadow-sm"
                 >
                   -
                 </button>
-                <span className="text-xl font-medium px-4 text-slate-100">{quantity}</span>
+                <span className="text-2xl font-bold px-4 text-slate-900 min-w-12 text-center">{quantity}</span>
                 <button
                   onClick={() => setQuantity(quantity + 1)}
-                  className="w-10 h-10 rounded-lg border border-gray-300 text-slate-100 flex items-center justify-center hover:bg-gray-50 transition cursor-pointer"
+                  className="w-12 h-12 rounded-xl border border-slate-200 text-slate-700 flex items-center justify-center hover:bg-slate-50 transition cursor-pointer font-bold text-xl shadow-sm"
                 >
                   +
                 </button>
@@ -331,30 +332,30 @@ export default function ProductDetailPage() {
             {/* Add to Cart Button */}
             <button
               onClick={handleAddToCart}
-              className="w-full bg-pink-600 text-white py-3 px-6 rounded-xl font-semibold text-lg hover:bg-pink-700 transition shadow-lg cursor-pointer"
+              className="w-full bg-[#312821] text-white py-3 px-6 rounded-xl font-bold text-lg hover:bg-black transition shadow-lg cursor-pointer"
             >
               Add to Cart
             </button>
 
             {/* Product Details */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-8">
-              <div className="bg-slate-800 rounded-lg p-4 border border-slate-600 shadow">
-                <h4 className="font-semibold text-pink-400 mb-1">Availability</h4>
-                <p className="text-slate-200">{productDetails.availability}</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-10">
+              <div className="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm">
+                <h4 className="font-bold text-[#312821] mb-1">Availability</h4>
+                <p className="text-slate-600 font-medium">{productDetails.availability}</p>
               </div>
 
-              <div className="bg-slate-800 rounded-lg p-4 border border-slate-600 shadow">
-                <h4 className="font-semibold text-pink-400 mb-1">Delivery Time</h4>
-                <p className="text-slate-200">{productDetails.deliveryTime}</p>
+              <div className="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm">
+                <h4 className="font-bold text-[#312821] mb-1">Delivery Time</h4>
+                <p className="text-slate-600 font-medium">{productDetails.deliveryTime}</p>
               </div>
 
-              <div className="sm:col-span-2 bg-slate-800 rounded-lg p-4 border border-slate-600 shadow">
-                <h4 className="font-semibold text-pink-400 mb-2">Key Ingredients</h4>
+              <div className="sm:col-span-2 bg-slate-50 rounded-2xl p-5 border border-slate-100 shadow-sm">
+                <h4 className="font-bold text-[#312821] mb-3">Key Ingredients</h4>
                 <div className="flex flex-wrap gap-2">
                   {productDetails.ingredients.map((ingredient, index) => (
                     <span
                       key={index}
-                      className="px-3 py-1 bg-slate-700 rounded-full text-sm text-slate-200 border border-slate-600"
+                      className="px-4 py-1.5 bg-white rounded-full text-sm text-[#312821] border border-slate-100 font-semibold shadow-sm"
                     >
                       {ingredient}
                     </span>
@@ -367,8 +368,8 @@ export default function ProductDetailPage() {
 
         {/* Related Products */}
         {category && (
-          <section className="mt-16">
-            <h2 className="text-2xl font-bold text-slate-100 mb-8">More from {category.title}</h2>
+          <section className="mt-20">
+            <h2 className="text-2xl font-bold text-slate-900 mb-10">More from {category.title}</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
               {category.cakes
                 .filter((cake) => cake.slug !== product.slug)
@@ -388,8 +389,8 @@ export default function ProductDetailPage() {
                       />
                     </div>
                     <div className="p-4 bg-white">
-                      <h4 className="font-semibold text-gray-800">{cake.name}</h4>
-                      <p className="text-pink-600 font-medium">{cake.price}</p>
+                      <h4 className="font-bold text-slate-900">{cake.name}</h4>
+                      <p className="text-[#312821] font-black">{cake.price}</p>
                     </div>
                   </Link>
                 ))}

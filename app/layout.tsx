@@ -1,5 +1,20 @@
 import type { Metadata } from "next";
+import { Open_Sans, Playfair_Display } from "next/font/google";
 import "./globals.css";
+
+const openSans = Open_Sans({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800"],
+  variable: "--font-open-sans",
+  display: "swap",
+});
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-playfair",
+  display: "swap",
+});
 import Footer from "@/components/ui/Footer";
 import { CartProvider } from "@/app/context/CartContext";
 import { CatalogProvider } from "@/app/context/CatalogContext";
@@ -18,7 +33,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="bg-slate-700 min-h-screen text-gray-800">
+      <body className={`${openSans.variable} ${playfair.variable} ${openSans.className} min-h-screen font-sans`}>
 
         <CatalogProvider>
           <CartProvider>{children}</CartProvider>

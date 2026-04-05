@@ -6,112 +6,108 @@ import flavours from "@/data/flavours.json";
 
 export default function FlavoursPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 to-white">
-      <Header />
-      
-      <main className="pt-32 pb-16 px-6">
-        <div className="max-w-6xl mx-auto">
-          {/* Breadcrumb */}
-          <div className="text-sm text-gray-600 mb-8">
-            <Link href="/" className="hover:text-pink-600 transition">Home</Link>
-            <span className="mx-2">/</span>
-            <Link href="/details/flavours" className="hover:text-pink-600 transition">Details</Link>
-            <span className="mx-2">/</span>
-            <span className="text-gray-900 font-medium">Flavours</span>
-          </div>
+    <div className="min-h-screen font-sans selection:bg-slate-200 selection:text-slate-900 pb-16">
+      <Header variant="light" /> {/* Stays light because of the dark hero banner below */}
 
-          {/* Page Header */}
-          <div className="mb-12">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-              Our Flavours
-            </h1>
-            <p className="text-lg text-gray-600 max-w-3xl">
-              Discover our delicious range of cake flavours. Each one is crafted with premium ingredients to create unforgettable taste experiences.
-            </p>
-          </div>
+      {/* Hero Banner with Background Image */}
+      <div className="relative w-full h-[40vh] min-h-[300px]">
+        <div
+          className="absolute inset-0 bg-[url('/cakes/default-image2.jpg')] bg-cover bg-center"
+        />
+        <div className="absolute inset-0 bg-slate-900/60" /> {/* Dark overlay for text readability */}
 
-          {/* Flavours Grid */}
-          <section className="mb-12">
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {flavours.map((flavour) => (
-                <div 
-                  key={flavour.name}
-                  className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
-                >
-                  {/* Color Swatch */}
-                  <div className="h-24 flex">
-                    {flavour.colors.map((color, idx) => (
-                      <div 
-                        key={idx}
-                        className={`flex-1 ${color}`}
-                      ></div>
-                    ))}
-                  </div>
+        <div className="absolute inset-0 flex items-center justify-center pt-16 text-center px-6">
+          <h1 className="text-4xl md:text-6xl font-bold text-white tracking-widest uppercase drop-shadow-xl">
+             Cake Flavours
+          </h1>
+        </div>
+      </div>
 
-                  {/* Flavour Info */}
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">
-                      {flavour.name}
-                    </h3>
-                    <p className="text-gray-600 text-sm leading-relaxed">
-                      {flavour.description}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
+      <main className="px-6 md:px-16 max-w-7xl mx-auto py-12">
+        {/* Breadcrumb */}
+        <nav className="mb-12 flex items-center space-x-2 text-sm">
+          <Link href="/" className="text-slate-400 hover:text-[#312821] transition-colors">Home</Link>
+          <span className="text-slate-400">/</span>
+          <Link href="/details/flavours" className="text-slate-400 hover:text-[#312821] transition-colors">Details</Link>
+          <span className="text-slate-400">/</span>
+          <span className="text-slate-900 font-bold">Flavours</span>
+        </nav>
 
-          {/* Popular Combinations */}
-          <section className="mb-12">
-            <h2 className="text-2xl font-bold text-gray-800 mb-6">Popular Combinations</h2>
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="bg-white rounded-xl shadow-lg p-6">
-                <h3 className="text-lg font-bold text-gray-900 mb-3">Classic Elegance</h3>
-                <p className="text-gray-700 mb-4">
-                  Vanilla sponge with vanilla buttercream - timeless and universally loved.
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+          {/* LEFT COLUMN: Narrative & Call-to-Action Box */}
+          <div className="lg:col-span-5 space-y-10">
+            <div className="space-y-6">
+              <p className="text-slate-600 text-lg font-medium leading-relaxed italic">
+                From timeless classics to adventurous combinations, our flavours are crafted with the finest ingredients to ensure a premium taste experience.
+              </p>
+              
+              <div className="bg-[#f66187] text-white p-8 rounded-3xl shadow-xl transform rotate-2 max-w-md">
+                <p className="text-base font-bold leading-relaxed">
+                  Our cakes are made exclusively with pure butter for the finest butter cake indulgence and Swiss Meringue Buttercream as frosting.
                 </p>
-                <div className="flex space-x-2">
-                  <span className="px-3 py-1 bg-pink-100 text-pink-700 rounded-full text-sm font-medium">Weddings</span>
-                  <span className="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium">Birthdays</span>
-                </div>
-              </div>
-
-              <div className="bg-white rounded-xl shadow-lg p-6">
-                <h3 className="text-lg font-bold text-gray-900 mb-3">Chocolate Lover's Dream</h3>
-                <p className="text-gray-700 mb-4">
-                  Rich chocolate sponge with chocolate ganache - indulgent and decadent.
-                </p>
-                <div className="flex space-x-2">
-                  <span className="px-3 py-1 bg-pink-100 text-pink-700 rounded-full text-sm font-medium">Celebrations</span>
-                  <span className="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium">Parties</span>
-                </div>
               </div>
             </div>
-          </section>
 
-          {/* Custom Flavours Notice */}
-          <section className="bg-pink-50 rounded-xl p-8 mb-12 border border-pink-200">
-            <h2 className="text-xl font-bold text-gray-900 mb-3">✨ Custom Flavours Available</h2>
-            <p className="text-gray-700">
-              Don't see your favorite flavour? We can create custom combinations to match your preferences. 
-              Contact us to discuss your unique flavor ideas!
-            </p>
-          </section>
+            <section className="bg-slate-50 rounded-2xl p-8 border border-slate-100 shadow-sm">
+              <h2 className="text-xl font-bold text-[#312821] mb-3">✨ Custom Flavours</h2>
+              <p className="text-slate-600 font-medium leading-relaxed">
+                Looking for something unique? We can create custom combinations to match your special celebration. 
+                Contact us to discuss your vision!
+              </p>
+            </section>
+          </div>
 
-          {/* Contact CTA */}
-          <section className="bg-gradient-to-r from-pink-500 to-purple-500 rounded-2xl p-8 text-white text-center">
-            <h2 className="text-2xl font-bold mb-3">Questions About Flavours?</h2>
-            <p className="mb-6 text-white/90">We'd love to help you choose the perfect taste for your celebration!</p>
-            <Link 
-              href="/#contact"
-              className="inline-block bg-white text-pink-600 font-semibold px-8 py-3 rounded-xl hover:shadow-lg transition"
-            >
-              Contact Us
-            </Link>
-          </section>
+          {/* RIGHT COLUMN: Flavour Listing with Swatches */}
+          <div className="lg:col-span-7">
+            <div className="space-y-8">
+              <h2 className="text-2xl font-black text-slate-900 uppercase tracking-tighter mb-8">Cake Flavour</h2>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-10">
+                {flavours.map((flavour) => (
+                  <div key={flavour.name} className="flex flex-col gap-4 group">
+                    {/* Artisanal Swatch Layout */}
+                    <div className="flex items-start gap-4">
+                      {/* 5-row vertical swatch */}
+                      <div className="flex flex-col w-12 h-12 rounded-lg overflow-hidden border border-slate-100 shrink-0 shadow-sm group-hover:shadow-md transition-shadow">
+                        {Array.from({ length: 5 }).map((_, i) => {
+                          const [color1, color2] = flavour.colors;
+                          return (
+                            <div
+                              key={i}
+                              className={`flex-1 ${i % 2 === 0 ? color1 : color2}`}
+                            />
+                          );
+                        })}
+                      </div>
+                      
+                      <div className="flex flex-col gap-1">
+                        <h3 className="text-lg font-black text-[#312821] tracking-tight group-hover:text-[#f66187] transition-colors focus:outline-none capitalize">
+                          {flavour.name}
+                        </h3>
+                        <p className="text-sm font-semibold leading-relaxed tracking-tight text-slate-500 line-clamp-3">
+                          {flavour.description}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </main>
+
+      {/* Footer CTA */}
+      <section className="bg-slate-50 max-w-7xl mx-auto rounded-3xl p-12 text-center border border-slate-100 mx-6 mb-16 shadow-inner">
+        <h2 className="text-3xl font-black text-[#312821] mb-4">Ready to Order?</h2>
+        <p className="text-slate-600 font-medium mb-8">Contact us today to select the perfect flavour for your next celebration.</p>
+        <Link 
+          href="/#contact"
+          className="inline-block bg-[#312821] text-white font-black px-12 py-4 rounded-2xl hover:bg-black transition shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+        >
+          Contact Us
+        </Link>
+      </section>
     </div>
   );
 }

@@ -51,12 +51,12 @@ export default function HomePage() {
         <Header/>
 
         {/* Centered CTA overlay */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-slate-100 z-10 space-y-6">
-          <h2 className="text-4xl md:text-6xl font-bold">Designer Cakes</h2>
-          <p className="text-xl md:text-2xl">Crafted with Love by TastiePastry</p>
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white z-10 space-y-6">
+          <h2 className="text-4xl md:text-6xl font-bold drop-shadow-lg">Designer Cakes</h2>
+          <p className="text-xl md:text-2xl drop-shadow-md">Crafted with Love by TastiePastry</p>
           <a
-            href="#products"
-            className="px-6 py-3 bg-slate-800 text-slate-100 font-semibold rounded-xl shadow hover:bg-opacity-90"
+            href="/catalog/wedding-cakes/floral-cakes"
+            className="px-8 py-4 bg-[#312821] text-white font-black rounded-xl shadow-lg hover:bg-[#1A1512] transition-all transform hover:scale-105"
           >
             View Our Products
           </a>
@@ -109,12 +109,12 @@ export default function HomePage() {
               >
                 <div>
                   <div className="flex justify-between items-center mb-6">
-                    <h3 className="text-2xl font-bold text-slate-100">
+                    <h3 className="text-2xl font-bold text-slate-800">
                       {mainCategoryNames[mainCat] || mainCat}
                     </h3>
                     <a
                       href={`/catalog/${mainCat}/${categories[0].id}`}
-                      className="text-slate-100 hover:underline font-medium"
+                      className="text-[#312821] hover:text-[#1A1512] hover:underline font-bold"
                     >
                       {/* Show text on tablet/desktop */}
                       <span className="hidden sm:inline">View More →</span>
@@ -142,15 +142,14 @@ export default function HomePage() {
 
                         <div className="relative p-5 flex flex-col gap-3 bg-white">
                           <h3
-                            className="text-sm md:text-base font-semibold text-gray-800 group-hover:text-pink-600
-                            transition-colors duration-300 line-clamp-2 leading-snug"
+                            className="text-sm md:text-base font-bold text-gray-800 group-hover:text-[#312821] transition-colors duration-300 line-clamp-2 leading-snug"
                           >
                             {cake.name}
                           </h3>
                           
                           {/* Price with subtle background */}
                           <div className="flex items-center justify-between">
-                            <span className="text-md font-bold text-pink-600">
+                            <span className="text-md font-black text-[#312821]">
                               {cake.price}
                             </span>
                           </div>

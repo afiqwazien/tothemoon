@@ -67,14 +67,14 @@ export default function Catalog({ onPriceChange }: { onPriceChange?: (price: num
 
   return (
       <div>
-      <Header/>
+      <Header variant="dark" />
       <main className="max-w-7xl mx-auto px-6 py-16 mt-4">
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-4xl font-extrabold text-white tracking-tight">
+          <h1 className="text-4xl md:text-4xl font-extrabold text-[#312821] tracking-tight">
             {selectedCategory ? (
-              <span className="text-pink-400 italic">{selectedCategory.title}</span>
+              <span className="text-[#312821] italic underline decoration-[#312821] underline-offset-8">{selectedCategory.title}</span>
             ) : (
-              <>Our <span className="text-pink-400 italic">Catalog</span></>
+              <>Our <span className="text-[#312821] italic underline decoration-[#312821] underline-offset-8">Catalog</span></>
             )}
           </h1>
         </div>
@@ -83,8 +83,8 @@ export default function Catalog({ onPriceChange }: { onPriceChange?: (price: num
           {/* Sidebar */}
           <aside className="md:w-1/5 space-y-6">
             {/* Categories */}
-            <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-5 shadow-xl">
-              <h2 className="text-sm font-bold mb-4 text-white/90 tracking-wide uppercase">
+            <div className="bg-white border border-slate-100 rounded-2xl p-6 shadow-sm">
+              <h2 className="text-sm font-black mb-4 text-[#312821] tracking-wide uppercase">
                 {maintitle}
               </h2>
               <ul className="flex flex-col gap-2">
@@ -92,13 +92,13 @@ export default function Catalog({ onPriceChange }: { onPriceChange?: (price: num
                   <li key={category.id}>
                     <a
                       href={`/catalog/${mainCategory}/${category.id}`}
-                      className={`block px-3 py-2 rounded-lg text-sm transition-all duration-200 ${
+                      className={`block px-4 py-2.5 rounded-xl text-sm transition-all duration-300 ${
                         categoryId === category.id
-                          ? "bg-gradient-to-r from-pink-500 to-purple-500 text-white font-semibold shadow-md"
-                          : "text-white/80 hover:bg-white/10 hover:text-white hover:pl-4"
+                          ? "bg-[#312821] text-white font-bold shadow-lg transform scale-[1.02]"
+                          : "text-slate-600 hover:bg-slate-100 hover:text-[#312821] hover:pl-5"
                       }`}
                     >
-                      {category.slug}
+                      {category.title || toTitle(category.slug)}
                     </a>
                   </li>
                 ))}
@@ -106,8 +106,8 @@ export default function Catalog({ onPriceChange }: { onPriceChange?: (price: num
             </div>
 
             {/* Price Slider */}
-            <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-5 shadow-xl">
-              <h2 className="text-sm font-bold mb-4 text-white/90 tracking-wide uppercase">
+            <div className="bg-white border border-slate-100 rounded-2xl p-6 shadow-sm">
+              <h2 className="text-sm font-black mb-4 text-[#312821] tracking-wide uppercase">
                 Price Range
               </h2>
               <input
@@ -116,12 +116,12 @@ export default function Catalog({ onPriceChange }: { onPriceChange?: (price: num
                 max={3000}
                 value={maxPrice}
                 onChange={(e) => handleChange(Number(e.target.value))}
-                className="w-full h-2 bg-white/20 rounded-lg appearance-none cursor-pointer accent-pink-500"
+                className="w-full h-2 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-[#312821]"
               />
-              <div className="flex justify-between items-center mt-3">
-                <span className="text-xs text-white/70">RM 0</span>
-                <span className="text-sm font-bold text-white">RM {maxPrice}</span>
-                <span className="text-xs text-white/70">RM 3000</span>
+              <div className="flex justify-between items-center mt-4">
+                <span className="text-[10px] font-bold text-slate-400 uppercase">RM 0</span>
+                <span className="text-sm font-black text-[#312821]">RM {maxPrice}</span>
+                <span className="text-[10px] font-bold text-slate-400 uppercase">RM 3k</span>
               </div>
             </div>
           </aside>
@@ -129,7 +129,7 @@ export default function Catalog({ onPriceChange }: { onPriceChange?: (price: num
           {/* Products */}
             <section className="md:w-4/5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {visibleCakes.length === 0 ? (
-                <p className="col-span-full text-center text-gray-500 mt-20">
+                <p className="col-span-full text-center text-slate-400 mt-20">
                   No products found under RM {maxPrice}.
                 </p>
               ) : (

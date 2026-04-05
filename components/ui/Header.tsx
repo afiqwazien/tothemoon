@@ -16,59 +16,67 @@ import { ShopDropdownSkeleton } from "@/components/ui/LoadingSkeletons";
 import React from "react";
 import { ShoppingCart, Menu, X, ChevronDown } from "lucide-react";
 import { useCart } from "@/app/context/CartContext";
+import Image from "next/image";
 import Link from "next/link";
 import CartPreview from "./CartPreview";
 
-export default function Header() {
+export default function Header({ variant = "light" }: { variant?: "light" | "dark" }) {
     const { cart } = useCart();
     const { catalog, loading } = useCatalog();
     const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
     const [mobileShopOpen, setMobileShopOpen] = React.useState(false);
-    // NEW: State for mobile Details accordion
     const [mobileDetailsOpen, setMobileDetailsOpen] = React.useState(false);
 
+    const textColor = variant === "light" ? "text-white" : "text-slate-900";
+    const hoverColor = "hover:text-[#312821]";
+    const logoColor = variant === "light" ? "text-white" : "text-[#312821]";
+
     return (
-        <header className="absolute top-0 left-0 right-0 z-20 flex items-center justify-between p-6 text-slate-100">
-          <Link href="/"><h1 className="text-2xl font-bold">TastiePastry</h1></Link>
+        <header className={`absolute top-0 left-0 right-0 z-50 flex items-center justify-between p-6 transition-colors duration-300 ${textColor}`}>
+          <Link href="/">
+            <span className={`text-3xl font-bold tracking-tighter font-[family-name:var(--font-playfair)] ${logoColor}`}>
+              TastiePastry
+            </span>
+          </Link>
           
           {/* Desktop Navigation */}
-          <nav className="space-x-6 font-medium hidden md:flex">
+          <nav className="space-x-8 font-semibold hidden md:flex items-center">
             {/* Home */}
             <Link href="/" className="relative group">
-              <span className="text-slate-100 group-hover:text-pink-400 transition">
+              <span className={`${textColor} ${hoverColor} transition-colors`}>
                 Home
               </span>
-              <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-pink-400 transition-all duration-300 group-hover:w-full"></span>
+              <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-[#312821] transition-all duration-300 group-hover:w-full"></span>
             </Link>
 
             {/* Shop with dropdown */}
-            <ShopDropdown />
+            <ShopDropdown variant={variant} />
 
-            {/* NEW: Details with dropdown */}
-            <DetailsDropdown />
+            {/* Details with dropdown */}
+            <DetailsDropdown variant={variant} />
 
             {/* About */}
             <Link href="/#about" className="relative group">
-              <span className="text-slate-100 group-hover:text-pink-400 transition">
+              <span className={`${textColor} ${hoverColor} transition-colors`}>
                 About
               </span>
-              <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-pink-400 transition-all duration-300 group-hover:w-full"></span>
+              <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-[#312821] transition-all duration-300 group-hover:w-full"></span>
             </Link>
 
             {/* Contact */}
             <Link href="/#contact" className="relative group">
-              <span className="text-slate-100 group-hover:text-pink-400 transition">
+              <span className={`${textColor} ${hoverColor} transition-colors`}>
                 Contact
               </span>
-              <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-pink-400 transition-all duration-300 group-hover:w-full"></span>
+              <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-[#312821] transition-all duration-300 group-hover:w-full"></span>
             </Link>
 
             <Popover>
               <PopoverTrigger asChild>
-                <button className="relative cursor-pointer">
+                <button className={`relative cursor-pointer ${textColor} ${hoverColor} transition-colors`}>
                   <ShoppingCart size={24} />
                   {cart.length > 0 && (
-                    <span className="absolute -top-2 -right-2 bg-pink-600 text-white text-xs font-bold px-2 py-0.5 rounded-full">
+                    <span className="absolute -top-2 -right-2 bg-[#312821] text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">
                       {cart.reduce((sum, item) => sum + item.quantity, 0)}
                     </span>
                   )}
@@ -87,10 +95,10 @@ export default function Header() {
 
           {/* Mobile Navigation */}
           <div className="flex items-center gap-4 md:hidden">
-            <Link href="/checkout" className="relative">
+            <Link href="/checkout" className={`relative ${textColor} ${hoverColor}`}>
               <ShoppingCart size={24} />
               {cart.length > 0 && (
-                <span className="absolute -top-2 -right-2 bg-pink-600 text-white text-xs font-bold px-2 py-0.5 rounded-full">
+                <span className="absolute -top-2 -right-2 bg-[#312821] text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">
                   {cart.reduce((sum, item) => sum + item.quantity, 0)}
                 </span>
               )}
@@ -98,18 +106,18 @@ export default function Header() {
 
             <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
               <SheetTrigger asChild>
-                <button className="text-slate-100 hover:text-pink-400 transition">
+                <button className={`${textColor} ${hoverColor} transition-colors`}>
                   <Menu size={28} />
                 </button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-[280px] bg-gradient-to-br from-pink-50 to-white">
+              <SheetContent side="right" className="w-[280px] bg-linear-to-br from-[#fefdf1] to-white">
                 <SheetTitle className="text-2xl font-bold text-gray-800 p-4">
                   TastiePastry
                 </SheetTitle>
                 <div className="flex flex-col space-y-4">
                   <Link 
                     href="/" 
-                    className="text-lg font-medium text-gray-700 hover:text-pink-500 transition-all hover:translate-x-2 duration-200 py-2 px-4 rounded-lg hover:bg-pink-100"
+                    className="text-lg font-bold text-slate-800 hover:text-[#312821] transition-all hover:translate-x-2 duration-200 py-2 px-4 rounded-lg hover:bg-slate-100"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     Home
@@ -119,7 +127,7 @@ export default function Header() {
                 <div className="rounded-lg overflow-hidden">
                   <button
                     onClick={() => setMobileShopOpen(!mobileShopOpen)}
-                    className="flex items-center justify-between w-full text-lg font-medium text-gray-700 hover:text-pink-500 transition-all duration-200 py-2 px-4 rounded-lg hover:bg-pink-100"
+                    className="flex items-center justify-between w-full text-lg font-bold text-slate-800 hover:text-[#312821] transition-all duration-200 py-2 px-4 rounded-lg hover:bg-slate-100"
                   >
                     <span>Shop</span>
                     <ChevronDown
@@ -154,7 +162,7 @@ export default function Header() {
                           return (
                             <div key={mainCat} className="space-y-2">
                               {/* Main Category Label */}
-                              <div className="text-xs font-bold text-pink-600 uppercase tracking-wide px-4 py-1">
+                              <div className="text-xs font-black text-[#312821] uppercase tracking-wide px-4 py-1">
                                 {mainCategoryNames[mainCat] || mainCat}
                               </div>
 
@@ -164,7 +172,7 @@ export default function Header() {
                                   <Link
                                     key={category.id}
                                     href={`/catalog/${mainCat}/${category.id}`}
-                                    className="text-sm text-gray-600 hover:text-pink-500 transition-all hover:translate-x-2 duration-200 py-2 px-4 rounded-md hover:bg-pink-50"
+                                    className="text-sm text-slate-600 font-medium hover:text-[#312821] transition-all hover:translate-x-2 duration-200 py-2 px-4 rounded-md hover:bg-slate-50"
                                     onClick={() => setMobileMenuOpen(false)}
                                   >
                                     {category.slug}
@@ -183,7 +191,7 @@ export default function Header() {
                   <div className="rounded-lg overflow-hidden">
                     <button
                       onClick={() => setMobileDetailsOpen(!mobileDetailsOpen)}
-                      className="flex items-center justify-between w-full text-lg font-medium text-gray-700 hover:text-pink-500 transition-all duration-200 py-2 px-4 rounded-lg hover:bg-pink-100"
+                      className="flex items-center justify-between w-full text-lg font-bold text-slate-800 hover:text-[#312821] transition-all duration-200 py-2 px-4 rounded-lg hover:bg-slate-100"
                     >
                       <span>Details</span>
                       <ChevronDown
@@ -197,21 +205,21 @@ export default function Header() {
                       <div className="flex flex-col space-y-1 pl-2 py-2">
                         <Link
                           href="/details/color-palette"
-                          className="text-sm text-gray-600 hover:text-pink-500 transition-all hover:translate-x-2 duration-200 py-2 px-4 rounded-md hover:bg-pink-50"
+                          className="text-sm text-slate-600 font-medium hover:text-[#312821] transition-all hover:translate-x-2 duration-200 py-2 px-4 rounded-md hover:bg-slate-50"
                           onClick={() => setMobileMenuOpen(false)}
                         >
                           Color Palette
                         </Link>
                         <Link
                           href="/details/size-guide"
-                          className="text-sm text-gray-600 hover:text-pink-500 transition-all hover:translate-x-2 duration-200 py-2 px-4 rounded-md hover:bg-pink-50"
+                          className="text-sm text-slate-600 font-medium hover:text-[#312821] transition-all hover:translate-x-2 duration-200 py-2 px-4 rounded-md hover:bg-slate-50"
                           onClick={() => setMobileMenuOpen(false)}
                         >
                           Size Guide
                         </Link>
                         <Link
                           href="/details/flavours"
-                          className="text-sm text-gray-600 hover:text-pink-500 transition-all hover:translate-x-2 duration-200 py-2 px-4 rounded-md hover:bg-pink-50"
+                          className="text-sm text-slate-600 font-medium hover:text-[#312821] transition-all hover:translate-x-2 duration-200 py-2 px-4 rounded-md hover:bg-slate-50"
                           onClick={() => setMobileMenuOpen(false)}
                         >
                           Flavours
@@ -222,7 +230,7 @@ export default function Header() {
 
                   <Link 
                     href="/#about" 
-                    className="text-lg font-medium text-gray-700 hover:text-pink-500 transition-all hover:translate-x-2 duration-200 py-2 px-4 rounded-lg hover:bg-pink-100"
+                    className="text-lg font-bold text-slate-800 hover:text-[#312821] transition-all hover:translate-x-2 duration-200 py-2 px-4 rounded-lg hover:bg-slate-100"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     About
@@ -230,7 +238,7 @@ export default function Header() {
 
                   <Link 
                     href="/#contact" 
-                    className="text-lg font-medium text-gray-700 hover:text-pink-500 transition-all hover:translate-x-2 duration-200 py-2 px-4 rounded-lg hover:bg-pink-100"
+                    className="text-lg font-bold text-slate-800 hover:text-[#312821] transition-all hover:translate-x-2 duration-200 py-2 px-4 rounded-lg hover:bg-slate-100"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     Contact
@@ -243,10 +251,12 @@ export default function Header() {
     )
 }
 
-export function ShopDropdown() {
+export function ShopDropdown({ variant }: { variant: "light" | "dark" }) {
   const [open, setOpen] = React.useState(false)
   const closeTimer = React.useRef<NodeJS.Timeout | null>(null)
   const { catalog, loading } = useCatalog();
+  const textColor = variant === "light" ? "text-white" : "text-slate-900";
+  const hoverColor = "hover:text-[#312821]";
 
   const handleOpen = () => {
     if (closeTimer.current) clearTimeout(closeTimer.current)
@@ -276,15 +286,16 @@ export function ShopDropdown() {
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger
-        className="text-slate-100 hover:text-pink-400 transition"
+        className={`${textColor} ${hoverColor} transition-colors`}
         onMouseEnter={handleOpen}
         onMouseLeave={handleClose}
       >
-        <span className="relative group cursor-pointer">
-          <span className="text-slate-100 group-hover:text-pink-400 transition">
+        <span className="relative group cursor-pointer flex items-center gap-1">
+          <span className={`${textColor} group-hover:text-[#312821] transition-colors`}>
             Shop
           </span>
-          <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-pink-400 transition-all duration-300 group-hover:w-full"></span>
+          <ChevronDown size={14} className="group-hover:rotate-180 transition-transform duration-300" />
+          <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-[#312821] transition-all duration-300 group-hover:w-full"></span>
         </span>
       </PopoverTrigger>
 
@@ -302,7 +313,7 @@ export function ShopDropdown() {
             {Object.entries(groupedCategories).map(([mainCat, categories]) => (
               <div key={mainCat} className="space-y-3">
                 {/* Main Category Header */}
-                <h3 className="text-sm font-bold text-pink-600 uppercase tracking-wide border-b border-pink-200 pb-2">
+                <h3 className="text-sm font-black text-[#312821] uppercase tracking-wide border-b border-slate-200 pb-2">
                   {mainCategoryNames[mainCat] || mainCat}
                 </h3>
 
@@ -312,7 +323,7 @@ export function ShopDropdown() {
                     <Link
                       key={category.id}
                       href={`/catalog/${mainCat}/${category.id}`}
-                      className="block px-3 py-2 text-sm text-gray-700 hover:bg-pink-50 hover:text-pink-600 rounded-lg transition-all duration-200 hover:translate-x-1"
+                      className="block px-3 py-2 text-sm text-slate-700 font-medium hover:bg-slate-50 hover:text-[#312821] rounded-lg transition-all duration-200 hover:translate-x-1"
                     >
                       {category.slug}
                     </Link>
@@ -328,9 +339,11 @@ export function ShopDropdown() {
 }
 
 // NEW: Details Dropdown Component
-export function DetailsDropdown() {
+export function DetailsDropdown({ variant }: { variant: "light" | "dark" }) {
   const [open, setOpen] = React.useState(false)
   const closeTimer = React.useRef<NodeJS.Timeout | null>(null)
+  const textColor = variant === "light" ? "text-white" : "text-slate-900";
+  const hoverColor = "hover:text-[#312821]";
 
   const handleOpen = () => {
     if (closeTimer.current) clearTimeout(closeTimer.current)
@@ -344,15 +357,16 @@ export function DetailsDropdown() {
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger
-        className="text-slate-100 hover:text-pink-400 transition"
+        className={`${textColor} ${hoverColor} transition-colors`}
         onMouseEnter={handleOpen}
         onMouseLeave={handleClose}
       >
-        <span className="relative group cursor-pointer">
-          <span className="text-slate-100 group-hover:text-pink-400 transition">
+        <span className="relative group cursor-pointer flex items-center gap-1">
+          <span className={`${textColor} group-hover:text-[#312821] transition-colors`}>
             Details
           </span>
-          <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-pink-400 transition-all duration-300 group-hover:w-full"></span>
+          <ChevronDown size={14} className="group-hover:rotate-180 transition-transform duration-300" />
+          <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-[#312821] transition-all duration-300 group-hover:w-full"></span>
         </span>
       </PopoverTrigger>
 
@@ -366,19 +380,19 @@ export function DetailsDropdown() {
         <div className="space-y-1">
           <Link
             href="/details/color-palette"
-            className="block px-3 py-2 text-sm text-gray-700 hover:bg-pink-50 hover:text-pink-600 rounded-lg transition-all duration-200 hover:translate-x-1"
+            className="block px-3 py-2 text-sm text-slate-700 font-medium hover:bg-slate-50 hover:text-[#312821] rounded-lg transition-all duration-200 hover:translate-x-1"
           >
             Color Palette
           </Link>
           <Link
             href="/details/size-guide"
-            className="block px-3 py-2 text-sm text-gray-700 hover:bg-pink-50 hover:text-pink-600 rounded-lg transition-all duration-200 hover:translate-x-1"
+            className="block px-3 py-2 text-sm text-slate-700 font-medium hover:bg-slate-50 hover:text-[#312821] rounded-lg transition-all duration-200 hover:translate-x-1"
           >
             Size Guide
           </Link>
           <Link
             href="/details/flavours"
-            className="block px-3 py-2 text-sm text-gray-700 hover:bg-pink-50 hover:text-pink-600 rounded-lg transition-all duration-200 hover:translate-x-1"
+            className="block px-3 py-2 text-sm text-slate-700 font-medium hover:bg-slate-50 hover:text-[#312821] rounded-lg transition-all duration-200 hover:translate-x-1"
           >
             Flavours
           </Link>

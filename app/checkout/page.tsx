@@ -142,8 +142,8 @@ export default function CheckoutPage() {
 
   return (
     <div>
-      <Header />
-      <main className="max-w-5xl mx-auto px-6 py-16 text-slate-100">
+      <Header variant="dark" />
+      <main className="max-w-5xl mx-auto px-6 py-16 text-slate-900">
         <h1 className="text-3xl font-bold mb-10">Checkout</h1>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
@@ -151,12 +151,12 @@ export default function CheckoutPage() {
           <div className="lg:col-span-2 space-y-8">
 
             {/* Cart Summary */}
-            <section className="bg-slate-800 rounded-xl p-6 border border-slate-700 shadow">
-              <h2 className="text-xl font-semibold mb-4 text-pink-400">Cart Summary</h2>
+            <section className="bg-white rounded-2xl p-8 border border-slate-100 shadow-sm">
+              <h2 className="text-2xl font-black mb-6 text-[#312821]">Cart Summary</h2>
               {cartItems.length === 0 ? (
                 <p className="text-slate-400">Your cart is empty.</p>
               ) : (
-                <div className="divide-y divide-slate-700">
+                <div className="divide-y divide-slate-100">
                   {cartItems.map((item, idx) => (
                     <div key={idx} className="flex items-center justify-between py-4">
                       {/* Product Image */}
@@ -177,11 +177,11 @@ export default function CheckoutPage() {
                       <div className="flex-1 px-4">
                         <button
                           onClick={() => router.push(`/product/${item.slug}`)}
-                          className="font-medium hover:text-pink-400 transition text-left cursor-pointer"
+                          className="font-black text-lg hover:text-[#312821] transition text-left cursor-pointer text-slate-900"
                         >
                           {item.name}
                         </button>
-                        <p className="text-sm text-slate-400">
+                        <p className="text-sm text-slate-500 font-medium">
                           Size: {formatSize(item.size)} · Flavour: {item.flavour}
                         </p>
                         <div className="flex items-center gap-3 mt-2">
@@ -196,15 +196,15 @@ export default function CheckoutPage() {
                                 handleUpdateQuantity(idx, item.quantity - 1);
                               }
                             }}
-                            className="w-8 h-8 flex items-center justify-center cursor-pointer rounded border border-slate-600 hover:border-pink-400 hover:bg-slate-700 transition"
+                            className="w-10 h-10 flex items-center justify-center cursor-pointer rounded-xl border border-slate-100 hover:border-[#312821] hover:bg-slate-50 transition font-bold"
                           >
                             –
                           </button>
-                          <span className="px-2">{item.quantity}</span>
+                          <span className="text-2xl font-bold px-4 text-slate-900 min-w-12 text-center">{item.quantity}</span>
                           <button
                             type="button"
                             onClick={() => handleUpdateQuantity(idx, item.quantity + 1)}
-                            className="w-8 h-8 flex items-center cursor-pointer justify-center rounded border border-slate-600 hover:border-pink-400"
+                            className="w-10 h-10 flex items-center cursor-pointer justify-center rounded-xl border border-slate-100 hover:border-[#312821] hover:bg-slate-50 transition font-bold"
                           >
                             +
                           </button>
@@ -213,7 +213,7 @@ export default function CheckoutPage() {
 
                       {/* Price & Delete */}
                       <div className="flex flex-col items-end gap-2">
-                        <p className="font-semibold text-pink-500 whitespace-nowrap">
+                        <p className="font-black text-[#312821] whitespace-nowrap">
                           RM {(item.price * item.quantity).toFixed(2)}
                         </p>
                         <button
@@ -223,10 +223,10 @@ export default function CheckoutPage() {
                               deleteItem(idx);
                             }
                           }}
-                          className="p-1.5 rounded-lg bg-red-500/10 text-red-400 hover:bg-red-500/20 hover:text-red-300 transition cursor-pointer"
+                          className="p-2 rounded-xl bg-rose-50 text-rose-500 hover:bg-rose-100 transition cursor-pointer"
                           title="Remove item"
                         >
-                          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                           </svg>
                         </button>
@@ -238,8 +238,8 @@ export default function CheckoutPage() {
             </section>
 
             {/* Delivery Details */}
-            <section className="bg-slate-800 rounded-xl p-6 border border-slate-700 shadow space-y-6">
-              <h2 className="text-xl font-semibold text-pink-400">Delivery Details</h2>
+            <section className="bg-white rounded-2xl p-8 border border-slate-100 shadow-sm space-y-6">
+              <h2 className="text-2xl font-black text-[#312821]">Delivery Details</h2>
 
               {/* Method */}
               <div className="space-y-2">
@@ -267,9 +267,9 @@ export default function CheckoutPage() {
 
               {/* Pickup address */}
               {deliveryMethod === "pickup" && (
-                <div className="bg-slate-700 p-4 rounded-lg text-sm text-slate-200">
-                  <p className="font-semibold text-pink-400">Pickup Address:</p>
-                  <p>
+                <div className="bg-slate-50 p-6 rounded-2xl text-sm text-slate-700 border border-slate-100">
+                  <p className="font-black text-[#312821] mb-1">Pickup Address:</p>
+                  <p className="font-medium leading-relaxed">
                     LOT PT 8216-A, TINGKAT BAWAH JALAN KUALA BERANG, <br />MUKIM BUKIT PAYONG, <br />21400 Marang, Terengganu
                   </p>
                 </div>
@@ -279,9 +279,9 @@ export default function CheckoutPage() {
               {deliveryMethod === "delivery" && (
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-slate-300 mb-2">
+                    <label className="block text-slate-700 font-bold mb-2">
                       Search your place{" "}
-                      <span className="text-sm italic">(Coverage area: Marang, Kuala Terengganu, Kuala Nerus, Certain Hulu Terengganu area)</span>
+                      <span className="text-xs font-normal italic text-slate-500">(Coverage area: Marang, Kuala Terengganu, Kuala Nerus, Certain Hulu Terengganu area)</span>
                     </label>
                     <CheckoutAddressInput onPlaceSelect={handlePlaceSelect} />
                   </div>
@@ -298,7 +298,7 @@ export default function CheckoutPage() {
                         </div>
                         <div className="flex items-center justify-between w-full max-w-xs mt-1">
                           <span className="text-sm">Delivery fee</span>
-                          <span className="font-semibold text-pink-500">RM {deliveryFee.toFixed(2)}</span>
+                          <span className="font-black text-[#312821]">RM {deliveryFee.toFixed(2)}</span>
                         </div>
                       </div>
                     )}
@@ -314,13 +314,13 @@ export default function CheckoutPage() {
 
               {/* Date */}
               <div>
-                <label className="block text-slate-300 mb-2">Select Date</label>
+                <label className="block text-slate-700 font-bold mb-2">Select Date</label>
                 <input
                   type="date"
                   value={selectedDate}
                   min={new Date().toISOString().split("T")[0]}
                   onChange={(e) => setSelectedDate(e.target.value)}
-                  className="w-full rounded-lg bg-slate-700 border border-slate-600 px-4 py-2 text-slate-100 cursor-pointer focus:outline-none focus:ring-2 focus:ring-pink-500"
+                  className="w-full rounded-xl bg-white border border-slate-100 px-4 py-3 text-slate-900 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#312821] shadow-sm"
                 />
               </div>
 
@@ -333,10 +333,10 @@ export default function CheckoutPage() {
                       key={slot}
                       type="button"
                       onClick={() => setSelectedTimeslot(slot)}
-                      className={`px-3 py-2 rounded-lg border text-sm transition cursor-pointer ${
+                      className={`px-3 py-3 rounded-xl border text-sm font-black transition cursor-pointer shadow-sm ${
                         selectedTimeslot === slot
-                          ? "border-pink-500 bg-pink-50 text-pink-600"
-                          : "border-slate-600 bg-slate-700 text-slate-200 hover:border-pink-400"
+                          ? "border-[#312821] bg-[#312821] text-white"
+                          : "border-slate-50 bg-white text-slate-700 hover:border-slate-300"
                       }`}
                     >
                       {slot}
@@ -347,8 +347,8 @@ export default function CheckoutPage() {
             </section>
 
             {/* Payment Method */}
-            <section className="bg-slate-800 rounded-xl p-6 border border-slate-700 shadow">
-              <h2 className="text-xl font-semibold mb-4 text-pink-400">Payment Method</h2>
+            <section className="bg-white rounded-2xl p-8 border border-slate-100 shadow-sm">
+              <h2 className="text-2xl font-black mb-6 text-[#312821]">Payment Method</h2>
               <div className="space-y-3">
                 {["Cash on Delivery", "Bank Transfer", "Credit/Debit Card"].map((method) => (
                   <label key={method} className="flex items-center gap-3 cursor-pointer">
@@ -367,10 +367,10 @@ export default function CheckoutPage() {
           </div>
 
           {/* Right: Order Summary */}
-          <aside className="space-y-6 sticky top-6 self-start">
-            <div className="bg-slate-800 rounded-xl p-6 border border-slate-700 shadow">
-              <h2 className="text-xl font-semibold mb-4 text-pink-400">Order Summary</h2>
-              <div className="space-y-2 text-slate-300">
+          <aside className="space-y-6 sticky top-32 self-start">
+            <div className="bg-white rounded-2xl p-8 border border-slate-100 shadow-xl">
+              <h2 className="text-2xl font-black mb-6 text-slate-900 border-b border-slate-50 pb-4">Order Summary</h2>
+              <div className="space-y-4 text-slate-700 font-medium text-lg">
                 <div className="flex justify-between">
                   <span>Subtotal</span>
                   <span>RM {subtotal.toFixed(2)}</span>
@@ -379,8 +379,8 @@ export default function CheckoutPage() {
                   <span>Delivery Fee</span>
                   <span>RM {deliveryFee.toFixed(2)}</span>
                 </div>
-                <div className="border-t border-slate-700 my-2"></div>
-                <div className="flex justify-between font-semibold text-pink-500">
+                <div className="border-t border-slate-100 my-4"></div>
+                <div className="flex justify-between font-black text-2xl text-[#312821]">
                   <span>Total</span>
                   <span>RM {total.toFixed(2)}</span>
                 </div>
@@ -390,10 +390,10 @@ export default function CheckoutPage() {
             <button
               disabled={!isFormComplete || cartItems.length === 0}
               onClick={() => setShowConfirmModal(true)}
-              className={`w-full py-3 px-6 rounded-xl font-semibold text-lg shadow-lg transition cursor-pointer ${
+              className={`w-full py-3 px-6 rounded-xl font-bold text-lg shadow-lg transition cursor-pointer ${
                 isFormComplete && cartItems.length > 0
-                  ? "bg-pink-600 hover:bg-pink-700 text-white"
-                  : "bg-slate-600 text-slate-400 cursor-not-allowed"
+                  ? "bg-[#312821] hover:bg-black text-white"
+                  : "bg-slate-200 text-slate-400 cursor-not-allowed border border-slate-300"
               }`}
             >
               Place Order
@@ -402,43 +402,43 @@ export default function CheckoutPage() {
         </div>
       </main>
       {showConfirmModal && (
-        <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 px-4">
-          <div className="bg-slate-800 rounded-2xl p-6 max-w-md w-full border border-slate-700 shadow-xl space-y-4">
-            <h2 className="text-xl font-bold text-pink-400">Confirm Your Order</h2>
+        <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center z-100 px-4">
+          <div className="bg-white rounded-3xl p-10 max-w-lg w-full border border-slate-100 shadow-2xl space-y-8 transform transition-all duration-300 scale-100 animate-in fade-in zoom-in-95">
+            <h2 className="text-3xl font-black text-slate-900 leading-tight">Confirm Your <span className="text-[#312821]">Sweet Order</span></h2>
 
             {/* Items */}
-            <div className="space-y-1 text-sm text-slate-300">
+            <div className="space-y-3 text-sm text-slate-600 bg-slate-50 p-6 rounded-2xl border border-slate-100">
               {cartItems.map((item, idx) => (
-                <div key={idx} className="flex justify-between">
-                  <span>{item.name} ({formatSize(item.size)}, {item.flavour}) x{item.quantity}</span>
-                  <span>RM {(item.price * item.quantity).toFixed(2)}</span>
+                <div key={idx} className="flex justify-between font-medium">
+                  <span className="flex-1 mr-4">{item.name} <span className="text-slate-400 font-normal">({formatSize(item.size)}, {item.flavour})</span> x{item.quantity}</span>
+                  <span className="font-bold text-slate-900">RM {(item.price * item.quantity).toFixed(2)}</span>
                 </div>
               ))}
+              
+              <div className="border-t border-slate-100 mt-4 pt-4 space-y-2">
+                <div className="flex justify-between">
+                  <span className="text-slate-500">Subtotal</span>
+                  <span className="font-bold text-slate-900">RM {subtotal.toFixed(2)}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-slate-500">Delivery Fee</span>
+                  <span className="font-bold text-slate-900">RM {deliveryFee.toFixed(2)}</span>
+                </div>
+                <div className="flex justify-between font-black text-xl text-[#312821] pt-1">
+                  <span>Total</span>
+                  <span>RM {total.toFixed(2)}</span>
+                </div>
+              </div>
             </div>
 
-            <div className="border-t border-slate-700 pt-3 space-y-1 text-sm text-slate-300">
-              <div className="flex justify-between">
-                <span>Subtotal</span>
-                <span>RM {subtotal.toFixed(2)}</span>
-              </div>
-              <div className="flex justify-between">
-                <span>Delivery Fee</span>
-                <span>RM {deliveryFee.toFixed(2)}</span>
-              </div>
-              <div className="flex justify-between font-semibold text-pink-400 text-base pt-1">
-                <span>Total</span>
-                <span>RM {total.toFixed(2)}</span>
-              </div>
-            </div>
-
-            <div className="border-t border-slate-700 pt-3 text-sm text-slate-300 space-y-1">
-              <p><span className="text-slate-400">Method:</span> {deliveryMethod === "pickup" ? "Store Pickup" : "Delivery"}</p>
+            <div className="space-y-3 text-sm font-black text-slate-700 bg-white p-2 rounded-xl">
+              <p className="flex justify-between"><span>Method:</span> <span className="text-[#312821]">{deliveryMethod === "pickup" ? "Store Pickup" : "Delivery"}</span></p>
               {deliveryMethod === "delivery" && (
-                <p><span className="text-slate-400">Address:</span> {deliveryAddress}</p>
+                <p className="flex justify-between gap-4"><span>Address:</span> <span className="text-slate-500 font-medium text-right">{deliveryAddress}</span></p>
               )}
-              <p><span className="text-slate-400">Date:</span> {selectedDate}</p>
-              <p><span className="text-slate-400">Timeslot:</span> {selectedTimeslot}</p>
-              <p><span className="text-slate-400">Payment:</span> {selectedPayment}</p>
+              <p className="flex justify-between"><span>Date:</span> <span className="text-slate-500 font-medium">{selectedDate}</span></p>
+              <p className="flex justify-between"><span>Timeslot:</span> <span className="text-slate-500 font-medium">{selectedTimeslot}</span></p>
+              <p className="flex justify-between"><span>Payment:</span> <span className="text-slate-500 font-medium">{selectedPayment}</span></p>
             </div>
 
             <div className="flex gap-3 pt-2">
@@ -450,7 +450,7 @@ export default function CheckoutPage() {
               </button>
               <button
                 onClick={handleConfirmOrder}
-                className="flex-1 py-2 rounded-xl bg-pink-600 hover:bg-pink-700 text-white font-semibold transition cursor-pointer"
+                className="flex-1 py-2 rounded-xl bg-[#312821] hover:bg-black text-white font-bold transition cursor-pointer"
               >
                 Confirm & WhatsApp
               </button>
