@@ -13,7 +13,7 @@ import { FullPageSkeleton } from "@/components/ui/LoadingSkeletons";
 const backgroundSlides = [
   { src: "/bg-image1.jpg", alt: "Designer Wedding Cake" },
   { src: "/bg-image2.jpg", alt: "Engagement Cake" },
-  { src: "/bg-image2.jpg", alt: "Birthday Cake" },
+  { src: "/bg-image3.jpg", alt: "Birthday Cake" },
 ];
 
 export default function HomePage() {
@@ -48,18 +48,12 @@ export default function HomePage() {
           <CarouselIndicators />
         </Carousel>
 
-        <Header/>
+        <Header />
 
         {/* Centered CTA overlay */}
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white z-10 space-y-6">
-          <h2 className="text-4xl md:text-6xl font-bold drop-shadow-lg">Designer Cakes</h2>
-          <p className="text-xl md:text-2xl drop-shadow-md">Crafted with Love by TastiePastry</p>
-          <a
-            href="/catalog/wedding-cakes/floral-cakes"
-            className="px-8 py-4 bg-[#312821] text-white font-black rounded-xl shadow-lg hover:bg-[#1A1512] transition-all transform hover:scale-105"
-          >
-            View Our Products
-          </a>
+          <span className="text-4xl font-bold tracking-tighter font-[family-name:var(--font-playfair)] text-white" style={{ margin: '5px' }}>TastiePastry</span>
+          <p className="text-sm md:text-md drop-shadow-md">Custom cake artistry</p>
         </div>
       </section>
 
@@ -99,7 +93,7 @@ export default function HomePage() {
             const finalCakes = cakesToShow.slice(0, 3); // Only show 3 cakes
 
             return (
-              <motion.div 
+              <motion.div
                 key={mainCat}
                 initial={{ opacity: 0, x: -50 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -132,12 +126,12 @@ export default function HomePage() {
                         className="group block rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition"
                       >
                         <div className="relative w-full h-50 md:h-60">
-                            <Image
-                              src={cake.images?.[0] || cake.image || ''}
-                              alt={cake.name}
-                              fill
-                              className="object-cover group-hover:scale-105 transition-transform duration-300"
-                            />
+                          <Image
+                            src={cake.images?.[0] || cake.image || ''}
+                            alt={cake.name}
+                            fill
+                            className="object-cover group-hover:scale-105 transition-transform duration-300"
+                          />
                         </div>
 
                         <div className="relative p-5 flex flex-col gap-3 bg-white">
@@ -146,7 +140,7 @@ export default function HomePage() {
                           >
                             {cake.name}
                           </h3>
-                          
+
                           {/* Price with subtle background */}
                           <div className="flex items-center justify-between">
                             <span className="text-md font-black text-[#312821]">
