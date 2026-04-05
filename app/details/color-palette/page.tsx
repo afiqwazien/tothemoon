@@ -7,7 +7,7 @@ export default function ColorPalettePage() {
   return (
     <div className="min-h-screen">
       <Header variant="dark" />
-      
+
       <main className="pt-32 pb-16 px-6">
         <div className="max-w-6xl mx-auto">
           {/* Breadcrumb */}
@@ -41,7 +41,7 @@ export default function ColorPalettePage() {
                   <p className="text-sm text-gray-600 uppercase tracking-widest font-mono">#312821</p>
                 </div>
               </div>
- 
+
               {/* Earth Cream */}
               <div className="bg-white rounded-xl shadow-lg p-6 space-y-4">
                 <div className="w-full h-32 bg-[#fefdf1] border border-slate-100 rounded-lg shadow-inner"></div>
@@ -50,7 +50,7 @@ export default function ColorPalettePage() {
                   <p className="text-sm text-gray-600 uppercase tracking-widest font-mono">#fefdf1</p>
                 </div>
               </div>
- 
+
               {/* Earth Gradient */}
               <div className="bg-white rounded-xl shadow-lg p-6 space-y-4">
                 <div className="w-full h-32 bg-linear-to-r from-[#312821] to-[#604240] rounded-lg shadow-inner"></div>
@@ -70,17 +70,17 @@ export default function ColorPalettePage() {
                 <div className="w-full h-20 bg-slate-50 rounded-lg border border-slate-100"></div>
                 <p className="text-sm font-bold text-[#312821]">Bone White</p>
               </div>
-               
+
               <div className="bg-white rounded-xl shadow-lg p-4 space-y-3">
                 <div className="w-full h-20 bg-[#D7CCC8] rounded-lg"></div>
                 <p className="text-sm font-bold text-[#312821]">Sand</p>
               </div>
- 
+
               <div className="bg-white rounded-xl shadow-lg p-4 space-y-3">
                 <div className="w-full h-20 bg-[#A18E81] rounded-lg"></div>
                 <p className="text-sm font-bold text-[#312821]">Taupe</p>
               </div>
- 
+
               <div className="bg-white rounded-xl shadow-lg p-4 space-y-3">
                 <div className="w-full h-20 bg-white border border-slate-200 rounded-lg"></div>
                 <p className="text-sm font-bold text-[#312821]">Pure White</p>
@@ -92,7 +92,7 @@ export default function ColorPalettePage() {
           <section className="bg-linear-to-r from-[#312821] to-[#604240] rounded-2xl p-8 text-white text-center">
             <h2 className="text-2xl font-bold mb-3">Custom Palettes Available</h2>
             <p className="mb-6 text-white/90">Want a specific color scheme for your celebration? We can match any concept!</p>
-            <Link 
+            <Link
               href="/#contact"
               className="inline-block bg-white text-[#312821] font-black px-8 py-3 rounded-xl hover:shadow-lg transition"
             >
