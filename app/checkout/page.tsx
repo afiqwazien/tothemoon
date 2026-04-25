@@ -6,6 +6,8 @@ import { useCart } from "@/app/context/CartContext";
 import Image from "next/image";
 import Header from "@/components/ui/Header";
 import { useRouter } from "next/navigation";
+import { database } from "@/lib/firebase";
+import { ref, push, set } from "firebase/database";
 
 function haversineKm(lat1: number, lng1: number, lat2: number, lng2: number) {
   const R = 6371;
@@ -37,9 +39,17 @@ export default function CheckoutPage() {
   const [selectedTimeslot, setSelectedTimeslot] = useState("");
   const [selectedPayment, setSelectedPayment] = useState<string>("Cash on Delivery");
   const [deliveryAddress, setDeliveryAddress] = useState<string>("");
+  const [customerName, setCustomerName] = useState<string>("");
+  const [customerEmail, setCustomerEmail] = useState<string>("");
+  const [showEmailError, setShowEmailError] = useState(false);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
 
   const round2 = (v: number) => Math.round(v * 100) / 100;
+
+  const validateEmail = (email: string) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
 
   const calcDeliveryFeeFromKm = (km: number) => {
     if (km <= 5) return 10;
@@ -105,9 +115,11 @@ export default function CheckoutPage() {
   ];
 
   const isFormComplete =
-  selectedDate &&
-  selectedTimeslot &&
-  (deliveryMethod === "pickup" || (deliveryMethod === "delivery" && deliveryAddress));
+    selectedDate &&
+    selectedTimeslot &&
+    customerName &&
+    validateEmail(customerEmail) &&
+    (deliveryMethod === "pickup" || (deliveryMethod === "delivery" && deliveryAddress));
 
   const WHATSAPP_NUMBER = "60136305766";
 
@@ -122,6 +134,8 @@ export default function CheckoutPage() {
 
     return encodeURIComponent(
       `🛒 *New Order*\n\n` +
+      `*Customer:* ${customerName}\n` +
+      `*Email:* ${customerEmail}\n\n` +
       `*Items:*\n${itemLines}\n\n` +
       `*Subtotal:* RM ${subtotal.toFixed(2)}\n` +
       `*Delivery Fee:* RM ${deliveryFee.toFixed(2)}\n` +
@@ -134,10 +148,77 @@ export default function CheckoutPage() {
     );
   };
 
-  const handleConfirmOrder = () => {
-    const message = buildWhatsAppMessage();
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, "_blank");
-    setShowConfirmModal(false);
+  const handleConfirmOrder = async () => {
+    setIsProcessing(true);
+    
+    // 1. Prepare Order Data
+    const orderData = {
+      customer: {
+        name: customerName,
+        email: customerEmail,
+      },
+      items: cartItems.map(item => ({
+        id: item.id,
+        name: item.name,
+        size: item.size,
+        flavour: item.flavour,
+        quantity: item.quantity,
+        price: item.price
+      })),
+      subtotal,
+      deliveryFee,
+      total,
+      deliveryMethod,
+      deliveryAddress: deliveryMethod === "pickup" ? "Store Pickup" : deliveryAddress,
+      selectedDate,
+      selectedTimeslot,
+      paymentMethod: selectedPayment,
+      status: "pending",
+      productionStatus: "pending",
+      createdAt: new Date().toISOString(),
+    };
+
+    try {
+      // 2. Save Order to Firebase
+      const ordersRef = ref(database, "orders");
+      const newOrderRef = push(ordersRef);
+      const orderId = newOrderRef.key;
+      await set(newOrderRef, orderData);
+
+      if (selectedPayment === "Billplz (Online Banking)") {
+        // 3. Initiate Billplz Payment
+        const response = await fetch('/api/payment/create-bill', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: customerName,
+            email: customerEmail,
+            amount: total,
+            description: `Order ${orderId} - ToTheMoon Cakes`,
+            orderId: orderId, // Pass the Firebase Order ID
+          }),
+        });
+        
+        const data = await response.json();
+        
+        if (data.url) {
+          window.location.href = data.url;
+          return;
+        } else {
+          alert('Failed to initiate payment. Please try again.');
+        }
+      } else {
+        // 4. WhatsApp Flow for Offline Payments
+        const message = buildWhatsAppMessage();
+        window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, "_blank");
+        setShowConfirmModal(false);
+      }
+    } catch (error) {
+      console.error('Order Error:', error);
+      alert('An error occurred while placing your order.');
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
   return (
@@ -235,6 +316,54 @@ export default function CheckoutPage() {
                   ))}
                 </div>
               )}
+            </section>
+            
+            {/* Customer Information */}
+            <section className="bg-white rounded-2xl p-8 border border-slate-100 shadow-sm space-y-6">
+              <h2 className="text-2xl font-black text-[#312821]">Customer Information</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-slate-700 font-bold mb-2">Full Name</label>
+                  <input
+                    type="text"
+                    required
+                    value={customerName}
+                    onChange={(e) => setCustomerName(e.target.value)}
+                    placeholder="Enter your name"
+                    className="w-full rounded-xl bg-white border border-slate-100 px-4 py-3 text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#312821] shadow-sm"
+                  />
+                </div>
+                <div>
+                  <label className="block text-slate-700 font-bold mb-2">Email Address</label>
+                  <input
+                    type="email"
+                    required
+                    value={customerEmail}
+                    onChange={(e) => {
+                      setCustomerEmail(e.target.value);
+                      if (e.target.value && !validateEmail(e.target.value)) {
+                        setShowEmailError(true);
+                      } else {
+                        setShowEmailError(false);
+                      }
+                    }}
+                    onBlur={() => {
+                      if (customerEmail && !validateEmail(customerEmail)) {
+                        setShowEmailError(true);
+                      }
+                    }}
+                    placeholder="Enter your email"
+                    className={`w-full rounded-xl bg-white border px-4 py-3 text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#312821] shadow-sm transition ${
+                      showEmailError ? 'border-rose-500' : 'border-slate-100'
+                    }`}
+                  />
+                  {showEmailError && (
+                    <p className="text-xs text-rose-500 mt-1 font-medium italic animate-in fade-in slide-in-from-top-1">
+                      Please enter a valid email address
+                    </p>
+                  )}
+                </div>
+              </div>
             </section>
 
             {/* Delivery Details */}
@@ -350,7 +479,7 @@ export default function CheckoutPage() {
             <section className="bg-white rounded-2xl p-8 border border-slate-100 shadow-sm">
               <h2 className="text-2xl font-black mb-6 text-[#312821]">Payment Method</h2>
               <div className="space-y-3">
-                {["Cash on Delivery", "Bank Transfer", "Credit/Debit Card"].map((method) => (
+                {["Cash on Delivery", "Bank Transfer", "Billplz (Online Banking)"].map((method) => (
                   <label key={method} className="flex items-center gap-3 cursor-pointer">
                     <input
                       type="radio"
@@ -441,6 +570,11 @@ export default function CheckoutPage() {
               <p className="flex justify-between"><span>Payment:</span> <span className="text-slate-500 font-medium">{selectedPayment}</span></p>
             </div>
 
+            <div className="space-y-1 text-sm text-slate-500">
+              <p>Name: {customerName}</p>
+              <p>Email: {customerEmail}</p>
+            </div>
+
             <div className="flex gap-3 pt-2">
               <button
                 onClick={() => setShowConfirmModal(false)}
@@ -449,10 +583,18 @@ export default function CheckoutPage() {
                 Back
               </button>
               <button
+                disabled={isProcessing}
                 onClick={handleConfirmOrder}
-                className="flex-1 py-2 rounded-xl bg-[#312821] hover:bg-black text-white font-bold transition cursor-pointer"
+                className="flex-1 py-2 rounded-xl bg-[#312821] hover:bg-black text-white font-bold transition cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
-                Confirm & WhatsApp
+                {isProcessing ? (
+                  <>
+                    <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+                    Processing...
+                  </>
+                ) : (
+                  selectedPayment === "Billplz (Online Banking)" ? "Pay Now" : "Confirm & WhatsApp"
+                )}
               </button>
             </div>
           </div>
