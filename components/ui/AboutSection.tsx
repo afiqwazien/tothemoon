@@ -6,7 +6,7 @@ import Image from "next/image";
 export default function AboutSection() {
   return (
     <section id="about" className="relative bg-slate-50/50 py-24">
-      <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center px-6">
+      <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center px-4 md:px-6">
         {/* Left side image */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}

@@ -41,6 +41,7 @@ export default function CheckoutPage() {
   const [deliveryAddress, setDeliveryAddress] = useState<string>("");
   const [customerName, setCustomerName] = useState<string>("");
   const [customerEmail, setCustomerEmail] = useState<string>("");
+  const [customerPhone, setCustomerPhone] = useState<string>("");
   const [showEmailError, setShowEmailError] = useState(false);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -118,6 +119,7 @@ export default function CheckoutPage() {
     selectedDate &&
     selectedTimeslot &&
     customerName &&
+    customerPhone &&
     validateEmail(customerEmail) &&
     (deliveryMethod === "pickup" || (deliveryMethod === "delivery" && deliveryAddress));
 
@@ -135,6 +137,7 @@ export default function CheckoutPage() {
     return encodeURIComponent(
       `🛒 *New Order*\n\n` +
       `*Customer:* ${customerName}\n` +
+      `*Phone:* ${customerPhone}\n` +
       `*Email:* ${customerEmail}\n\n` +
       `*Items:*\n${itemLines}\n\n` +
       `*Subtotal:* RM ${subtotal.toFixed(2)}\n` +
@@ -156,6 +159,7 @@ export default function CheckoutPage() {
       customer: {
         name: customerName,
         email: customerEmail,
+        phone: customerPhone,
       },
       items: cartItems.map(item => ({
         id: item.id,
@@ -193,6 +197,7 @@ export default function CheckoutPage() {
           body: JSON.stringify({
             name: customerName,
             email: customerEmail,
+            mobile: customerPhone,
             amount: total,
             description: `Order ${orderId} - ToTheMoon Cakes`,
             orderId: orderId, // Pass the Firebase Order ID
@@ -224,7 +229,7 @@ export default function CheckoutPage() {
   return (
     <div>
       <Header variant="dark" />
-      <main className="max-w-5xl mx-auto px-6 py-16 text-slate-900">
+      <main className="max-w-5xl mx-auto px-4 md:px-6 py-16 text-slate-900">
         <h1 className="text-3xl font-bold mb-10">Checkout</h1>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
@@ -362,6 +367,17 @@ export default function CheckoutPage() {
                       Please enter a valid email address
                     </p>
                   )}
+                </div>
+                <div className="md:col-span-2">
+                  <label className="block text-slate-700 font-bold mb-2">Phone Number</label>
+                  <input
+                    type="tel"
+                    required
+                    value={customerPhone}
+                    onChange={(e) => setCustomerPhone(e.target.value)}
+                    placeholder="e.g. 0123456789"
+                    className="w-full rounded-xl bg-white border border-slate-100 px-4 py-3 text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#312821] shadow-sm"
+                  />
                 </div>
               </div>
             </section>
@@ -572,6 +588,7 @@ export default function CheckoutPage() {
 
             <div className="space-y-1 text-sm text-slate-500">
               <p>Name: {customerName}</p>
+              <p>Phone: {customerPhone}</p>
               <p>Email: {customerEmail}</p>
             </div>
 

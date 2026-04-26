@@ -2,7 +2,7 @@ import { FaThreads, FaFacebook, FaTiktok, FaInstagram } from "react-icons/fa6";
 
 export default function Footer() {
   return (
-    <footer className="bg-white text-slate-600 border-t border-slate-100 py-12 px-6 mt-16">
+    <footer className="bg-white text-slate-600 border-t border-slate-100 py-12 px-4 md:px-6 mt-16">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
         {/* Left: Brand */}
         <div className="text-center md:text-left">

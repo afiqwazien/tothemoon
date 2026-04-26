@@ -42,7 +42,7 @@ export default function ProductDetailPage() {
     return (
       <div>
         <Header variant="dark" />
-        <main className="max-w-7xl mx-auto px-6 py-16 mt-4">
+        <main className="max-w-7xl mx-auto px-4 md:px-8 py-16 mt-4">
           <FullPageSkeleton />
         </main>
       </div>
@@ -135,7 +135,7 @@ export default function ProductDetailPage() {
     <div>
       <Header variant="dark" />
 
-      <main className="max-w-7xl mx-auto px-6 py-16 mt-4">
+      <main className="max-w-7xl mx-auto px-4 md:px-8 py-16 mt-4">
         {/* Breadcrumb */}
         <nav className="mb-8">
           <div className="flex items-center space-x-2 text-sm">

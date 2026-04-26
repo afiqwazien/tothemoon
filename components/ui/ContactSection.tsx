@@ -4,7 +4,7 @@ import { FaThreads, FaFacebook, FaTiktok, FaInstagram } from "react-icons/fa6";
 
 export default function ContactSection() {
   return (
-    <section id="contact" className="bg-white py-24 px-8 border-t border-slate-100/50">
+    <section id="contact" className="bg-white py-24 px-4 md:px-8 border-t border-slate-100/50">
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
 
         {/* Left: Get in Touch heading + form */}
@@ -13,7 +13,7 @@ export default function ContactSection() {
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="relative px-6"
+          className="relative px-0 md:px-6"
         >
           <div className="space-y-6">
             <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-4">Get in Touch</h2>
@@ -65,7 +65,7 @@ export default function ContactSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
           viewport={{ once: true }}
-          className="space-y-6 px-6 pt-4 md:pt-2"
+          className="space-y-6 px-0 md:px-6 pt-4 md:pt-2"
         >
           {/* Contact */}
           <div className="bg-slate-50 border border-slate-200 rounded-2xl p-6 space-y-4">

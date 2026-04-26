@@ -20,7 +20,7 @@ export default function Catalog({ onPriceChange }: { onPriceChange?: (price: num
     return (
       <div>
         <Header />
-        <main className="max-w-7xl mx-auto px-6 py-16 mt-4">
+        <main className="max-w-7xl mx-auto px-4 md:px-8 py-16 mt-4">
           <FullPageSkeleton />
         </main>
       </div>
@@ -68,7 +68,7 @@ export default function Catalog({ onPriceChange }: { onPriceChange?: (price: num
   return (
       <div>
       <Header variant="dark" />
-      <main className="max-w-7xl mx-auto px-6 py-16 mt-4">
+      <main className="max-w-7xl mx-auto px-4 md:px-8 py-16 mt-4">
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-4xl font-extrabold text-[#312821] tracking-tight">
             {selectedCategory ? (
