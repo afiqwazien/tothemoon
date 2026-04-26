@@ -1,4 +1,4 @@
-import { Instagram, Facebook, Music2 } from "lucide-react";
+import { FaThreads, FaFacebook, FaTiktok, FaInstagram } from "react-icons/fa6";
 
 export default function Footer() {
   return (
@@ -15,31 +15,40 @@ export default function Footer() {
         {/* Right: Social Icons */}
         <div className="flex space-x-6">
           <a
-            href="https://www.instagram.com/"
+            href="https://www.instagram.com/tastiepastry/"
             target="_blank"
             rel="noopener noreferrer"
             className="p-3 rounded-full bg-slate-50 text-slate-600 hover:bg-[#312821] hover:text-white transition-all duration-300 shadow-sm"
             aria-label="Instagram"
           >
-            <Instagram size={20} />
+            <FaInstagram size={20} />
           </a>
           <a
-            href="https://www.facebook.com/"
+            href="https://www.facebook.com/TastiePastry/"
             target="_blank"
             rel="noopener noreferrer"
             className="p-3 rounded-full bg-slate-50 text-slate-600 hover:bg-[#312821] hover:text-white transition-all duration-300 shadow-sm"
             aria-label="Facebook"
           >
-            <Facebook size={20} />
+            <FaFacebook size={20} />
           </a>
           <a
-            href="https://www.tiktok.com/"
+            href="https://www.tiktok.com/@tastiepastry"
             target="_blank"
             rel="noopener noreferrer"
             className="p-3 rounded-full bg-slate-50 text-slate-600 hover:bg-[#312821] hover:text-white transition-all duration-300 shadow-sm"
             aria-label="TikTok"
           >
-            <Music2 size={20} />
+            <FaTiktok size={20} />
+          </a>
+          <a
+            href="https://www.threads.com/@tastiepastry"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-3 rounded-full bg-slate-50 text-slate-600 hover:bg-[#312821] hover:text-white transition-all duration-300 shadow-sm"
+            aria-label="Threads"
+          >
+            <FaThreads size={20} />
           </a>
         </div>
       </div>

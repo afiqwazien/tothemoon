@@ -217,6 +217,13 @@ export default function Header({ variant = "light" }: { variant?: "light" | "dar
                     >
                       Flavours
                     </Link>
+                    <Link
+                      href="/details/pickup-delivery"
+                      className="text-sm text-slate-600 font-medium hover:text-[#312821] transition-all hover:translate-x-2 duration-200 py-2 px-4 rounded-md hover:bg-slate-50"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      Pickup &amp; Delivery
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -382,6 +389,12 @@ export function DetailsDropdown({ variant }: { variant: "light" | "dark" }) {
             className="block px-3 py-2 text-sm text-slate-700 font-medium hover:bg-slate-50 hover:text-[#312821] rounded-lg transition-all duration-200 hover:translate-x-1"
           >
             Flavours
+          </Link>
+          <Link
+            href="/details/pickup-delivery"
+            className="block px-3 py-2 text-sm text-slate-700 font-medium hover:bg-slate-50 hover:text-[#312821] rounded-lg transition-all duration-200 hover:translate-x-1"
+          >
+            Pickup &amp; Delivery
           </Link>
         </div>
       </PopoverContent>

@@ -9,10 +9,10 @@ export default function SizeGuidePage() {
       <Header variant="light" /> {/* Stays light because of the dark hero banner below */}
 
       {/* Hero Banner with Background Image */}
-      <div className="relative w-full h-[40vh] min-h-[300px]">
+      <div className="relative w-full h-[50vh] min-h-[300px]">
         {/* Placeholder beautiful cake image from Unsplash, can be replaced by your own local asset later */}
         <div
-          className="absolute inset-0 bg-[url('/cakes/bg-image2.jpg')] bg-cover bg-center"
+          className="absolute inset-0 bg-[url('/cakes/bg-image1.jpg')] bg-cover bg-center"
         />
         <div className="absolute inset-0 bg-slate-900/60" /> {/* Dark overlay for text readability */}
 
