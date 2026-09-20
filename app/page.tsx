@@ -53,7 +53,7 @@ export default function HomePage() {
         {/* Centered CTA overlay */}
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white z-10 space-y-6">
           <span className="text-4xl font-bold tracking-tighter font-[family-name:var(--font-playfair)] text-white" style={{ margin: '5px' }}>TastiePastry</span>
-          <p className="text-sm md:text-md drop-shadow-md">Custom cake artistry</p>
+          <p className="text-sm md:text-md drop-shadow-md">Multidisciplinary Cake Studio</p>
         </div>
       </section>
 
