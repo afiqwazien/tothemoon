@@ -51,9 +51,23 @@ export default function HomePage() {
         <Header />
 
         {/* Centered CTA overlay */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white z-10 space-y-6">
-          <span className="text-4xl font-bold tracking-tighter font-[family-name:var(--font-playfair)] text-white" style={{ margin: '5px' }}>TastiePastry</span>
-          <p className="text-sm md:text-md drop-shadow-md">Multidisciplinary Cake Studio</p>
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white z-10 space-y-4 px-4 pointer-events-none">
+          <motion.h1
+            initial={{ opacity: 0, y: 30, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+            className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter font-[family-name:var(--font-playfair)] text-white drop-shadow-lg"
+          >
+            TastiePastry
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.45 }}
+            className="text-sm md:text-base tracking-widest uppercase font-light text-white/90 drop-shadow-md"
+          >
+            Multidisciplinary Cake Studio
+          </motion.p>
         </div>
       </section>
 
